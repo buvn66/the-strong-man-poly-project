@@ -67,20 +67,20 @@ public class Playercontrols : MonoBehaviour
         {
             //qua phải
             isMovingRight = true;
-            //_animator.SetBool("Isrunning", true);
+            _animator.SetBool("IsRunning", true);
             //_animator.SetBool("Isjump", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("IsRunning", false);
             //_animator.SetBool("Isjump", false);
         }
         else
         {
             //đứng yên 
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("IsRunning", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
