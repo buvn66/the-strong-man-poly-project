@@ -68,14 +68,14 @@ public class Playercontrols : MonoBehaviour
             //qua phải
             isMovingRight = true;
             _animator.SetBool("IsRunning", true);
-            //_animator.SetBool("Isjump", true);
+            _animator.SetBool("Isjumping", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
             _animator.SetBool("IsRunning", false);
-            //_animator.SetBool("Isjump", false);
+            _animator.SetBool("Isjumping", false);
         }
         else
         {
