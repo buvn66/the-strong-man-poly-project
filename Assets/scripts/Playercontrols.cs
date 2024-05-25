@@ -1,109 +1,92 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
-using UnityEngine.U2D;
-using System;
 
 public class Playercontrols : MonoBehaviour
 {
-
-
-    //làm cho nhân vật duy chuyển 
-    //public là hàm tồn tại ở mọi nơi 
-    //private làm hàm tồ tại chỉ trong một class
-    [SerializeField] //SerializeField cho phép chỉnh sửa tr edit
+    // Làm cho nhân vật di chuyển 
+    [SerializeField]
     public float movespeed = 5f;
 
-
-    // giá tri lực nhẩy
+    // Giá trị lực nhảy
     [SerializeField]
     private float _jumpForce = 40f;
 
-
-    //kiểm tra hướng duy  chuyển của nhân vật 
+    // Kiểm tra hướng di chuyển của nhân vật 
     private bool isMovingRight = true;
 
+    // Tham chiếu tới Rigidbody2D        
+    private Rigidbody2D _rigidbody2D;
 
-    //tham chiếu tới rigibody 2D        
-    private Rigidbody2D _rigibody2D;
-
-
-    //tham chiếu tới BoxCollider2D
+    // Tham chiếu tới BoxCollider2D
     private BoxCollider2D _boxCollider2D;
 
-    //tham chiếu tới animator
+    // Tham chiếu tới Animator
     private Animator _animator;
 
-    //hàm start dùng để khởi tạo các  giá trị của biến 
+    // Hàm start dùng để khởi tạo các giá trị của biến 
     private void Start()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
-        _rigibody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-
     }
 
-
-    //dùng để cập nhật trạ thái của đối tượng dựa trên thời ggian thật  
+    // Dùng để cập nhật trạng thái của đối tượng dựa trên thời gian thực  
     private void Update()
     {
         Move();
         Jump();
     }
 
-
     private void Move()
     {
-        //horizontalInput lắng nghe các phím điều hướng 
+        // Lấy giá trị input từ người dùng
         var horizontalInput = Input.GetAxis("Horizontal");
-        //điều khiển phải trái
-        transform.localPosition += new Vector3(horizontalInput, 0, 0)
-            * movespeed * Time.deltaTime;
-        //+= là lấy giá tri ban đầu tạo ra giá trị mới
 
-        if (horizontalInput > 0)
+        // Cập nhật vị trí của nhân vật dựa trên input
+        transform.localPosition += new Vector3(horizontalInput, 0, 0) * movespeed * Time.deltaTime;
+
+        // Cập nhật animation dựa trên trạng thái di chuyển
+        if (horizontalInput != 0)
         {
-            //qua phải
-            isMovingRight = true;
             _animator.SetBool("IsRunning", true);
-            _animator.SetBool("Isjumping", true);
-        }
-        else if (horizontalInput < 0)
-        {
-            //qua trái 
-            isMovingRight = false;
-            _animator.SetBool("IsRunning", false);
-            _animator.SetBool("Isjumping", false);
+
+            // Xác định hướng di chuyển của nhân vật và cập nhật hướng mặt của nhân vật
+            if (horizontalInput > 0)
+            {
+                isMovingRight = true;
+            }
+            else if (horizontalInput < 0)
+            {
+                isMovingRight = false;
+            }
+
+            // Xoay nhân vật theo hướng di chuyển
+            transform.localScale = isMovingRight ? new Vector2(1f, 1f) : new Vector2(-1f, 1f);
         }
         else
         {
-            //đứng yên 
             _animator.SetBool("IsRunning", false);
         }
-        //xoay nhân vật 
-        transform.localScale = isMovingRight ?
-            new Vector2(1f, 1f)
-            : new Vector2(-1f, 1);
     }
 
-
-    //hàm sử lý Jump
+    // Hàm xử lý Jump
     private void Jump()
     {
-        //kiểm tra nhân vật còn trên mặt đất hay không
-        var Check = _boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform"));
-        if (Check == false)
+        // Kiểm tra nhân vật có đang trên mặt đất hay không
+        var isGrounded = _boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform"));
+
+        if (!isGrounded)
         {
             return;
         }
-        var verticalInput = Input.GetAxis("Jump");
-        if (verticalInput > 0)
+
+        if (Input.GetButtonDown("Jump"))
         {
-            //1. tạo lực nhảy lên trên.
-            //_rigidbody2D.AddForce(new Vector2(0, _jumpForce));
-            _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
+            // Tạo lực nhảy lên trên.
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
+            _animator.SetTrigger("Jump");
         }
     }
 }
