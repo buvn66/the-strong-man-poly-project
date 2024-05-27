@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - platform
+  - player
   layers:
   - Default
   - TransparentFX
@@ -12,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - platform
   - 
   - 
   - 
@@ -42,6 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Platform
+  - name: platform
     uniqueID: 680566401
     locked: 0
