@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - ground
+  - Enemes
+  - coinn
+  - Boss
   layers:
   - Default
   - TransparentFX
