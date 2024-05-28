@@ -8,6 +8,7 @@ TagManager:
   - Enemes
   - coinn
   - Boss
+  - Ladder
   layers:
   - Default
   - TransparentFX

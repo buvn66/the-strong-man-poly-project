@@ -117,6 +117,6 @@ public class Enemiescript : MonoBehaviour
     void UpdateCoinText()
     {
         // Cập nhật số coin lên TextMeshPro
-        coinText.text = coinCount.ToString();
+        coinText.text = coinCount.ToString();   
     }
 }

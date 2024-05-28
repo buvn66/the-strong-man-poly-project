@@ -58,16 +58,4 @@ public class Enemiescontrols : MonoBehaviour
         }
         transform.localScale = currentScale;
     }
-
-    // Giết quái vật và làm biến mất viên đạn
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("bullet"))
-        {
-            // Nếu chạm tới viên đạn thì quái vật chết
-            Destroy(gameObject);
-            // Viên đạn biến mất
-            Destroy(collision.gameObject);
-        }
-    }
 }
