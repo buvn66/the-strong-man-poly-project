@@ -6,6 +6,7 @@ TagManager:
   tags:
   - platform
   - Enemes
+  - background
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Water
   - UI
   - platform
-  - 
+  - background
   - 
   - 
   - 
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: Platform
     uniqueID: 680566401
+    locked: 0
+  - name: background
+    uniqueID: 264293121
     locked: 0
