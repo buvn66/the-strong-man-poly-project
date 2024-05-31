@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 260212090678993644}
   - component: {fileID: 4209420640152831035}
   - component: {fileID: 7985339787790784142}
+  - component: {fileID: 917633886240888519}
   m_Layer: 0
   m_Name: Enemes
-  m_TagString: Enemes
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3046219270995653992}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.88, y: 2.2, z: -0.33377114}
+  m_LocalPosition: {x: 3.86, y: -21.52, z: -0.33377114}
   m_LocalScale: {x: 1, y: 0.7586176, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -197,3 +198,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &917633886240888519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046219270995653992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d2e193583cfe948835f334d544d45a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  start: -2.19
+  end: 4.07
+  followDistance: 3
+  coinPrefab: {fileID: 3070642890468055562, guid: 708a8ed68f813d94ab929b73ddb025d2, type: 3}
+  minCoinCount: 1
+  maxCoinCount: 3
+  coinText: {fileID: 0}
