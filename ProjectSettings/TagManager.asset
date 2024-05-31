@@ -5,17 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - platform
-  - Enemes
-  - background
+  - Spikes
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - platform
-  - background
+  - Climbing
   - 
   - 
   - 
@@ -47,6 +46,9 @@ TagManager:
   - name: Platform
     uniqueID: 680566401
     locked: 0
-  - name: background
-    uniqueID: 264293121
+  - name: Player
+    uniqueID: 1357983049
+    locked: 0
+  - name: Climbing
+    uniqueID: 1174566045
     locked: 0

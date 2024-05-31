@@ -21,6 +21,9 @@ public class Playercontrols : MonoBehaviour
     [SerializeField]
     private float _jumpForce = 40f;
 
+    //cầu thang
+    [SerializeField] float climbingspeed = 5f;
+
 
     //kiểm tra hướng duy  chuyển của nhân vật 
     private bool isMovingRight = true;
@@ -37,12 +40,15 @@ public class Playercontrols : MonoBehaviour
     private Animator _animator;
 
     //hàm start dùng để khởi tạo các  giá trị của biến 
+    float _startgravityscale;
+    // Thêm biến moveInput ở đây
+    private Vector2 moveInput; 
     private void Start()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-
+        _startgravityscale = _rigibody2D.gravityScale;
     }
 
 
@@ -51,6 +57,7 @@ public class Playercontrols : MonoBehaviour
     {
         Move();
         Jump();
+        ClimbLander();
     }
 
 
@@ -86,6 +93,8 @@ public class Playercontrols : MonoBehaviour
         transform.localScale = isMovingRight ?
             new Vector2(1f, 1f)
             : new Vector2(-1f, 1);
+        // Gán giá trị cho moveInput
+        moveInput = new Vector2(horizontalInput, Input.GetAxis("Vertical")); 
     }
 
 
@@ -105,5 +114,16 @@ public class Playercontrols : MonoBehaviour
             //_rigidbody2D.AddForce(new Vector2(0, _jumpForce));
             _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
         }
+    }
+    void ClimbLander()
+    {
+        if (!_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        {
+            _rigibody2D.gravityScale = _startgravityscale;
+            return;
+        }
+        _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, moveInput.y * climbingspeed);
+        _rigibody2D.gravityScale = 0;
+
     }
 }
