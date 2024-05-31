@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 064a26ca8781c2d4daeacc5a72e008f4
+guid: 5d020943ef24d344bb6b013b500ec292
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,6 +69,19 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -106,30 +119,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SPA_Coins_0
+      name: On (38x38)_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 8
-        width: 16
-        height: 16
+        x: 0
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 794b29f4a7d7af145a0e40e759c0cb46
-      internalID: -361040307
+      spriteID: affc445c48872fe4585abf641998cf3a
+      internalID: -1840263442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPA_Coins_1
+      name: On (38x38)_1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 8
-        width: 14
-        height: 16
+        x: 38
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fc2bc70bdae635479b3a5b9d4a9a9c2
-      internalID: -1977122238
+      spriteID: d6caf3d918ace6540bd518256d72f5bf
+      internalID: -376309842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPA_Coins_2
+      name: On (38x38)_2
       rect:
         serializedVersion: 2
-        x: 90
-        y: 8
-        width: 4
-        height: 16
+        x: 76
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d1893f4e0fe8a34ca35e322e2e88ebc
-      internalID: -391590295
+      spriteID: d572789dc61cb4246ab1ab13d9be1c4b
+      internalID: -1487203050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPA_Coins_3
+      name: On (38x38)_3
       rect:
         serializedVersion: 2
-        x: 124
-        y: 8
-        width: 14
-        height: 16
+        x: 114
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4bdd0b8e0b87bb4e93ce54e96931ea7
-      internalID: 2002398387
+      spriteID: 6aff826e627059445b5312049d6e6b51
+      internalID: 256501024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPA_Coins_4
+      name: On (38x38)_4
       rect:
         serializedVersion: 2
-        x: 160
-        y: 8
-        width: 16
-        height: 16
+        x: 152
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4e0091daea49694dabb6306fb7cd44c
-      internalID: 1039945315
+      spriteID: 10b75dd0da176fe46876c685804e79d8
+      internalID: -624882714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPA_Coins_5
+      name: On (38x38)_5
       rect:
         serializedVersion: 2
-        x: 198
-        y: 8
-        width: 16
-        height: 16
+        x: 190
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d26b26c92836d4f47b4c5fe71c77f791
-      internalID: 1733568345
+      spriteID: e03f710d29c24554aaec2b9f85388d8e
+      internalID: 830450494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPA_Coins_6
+      name: On (38x38)_6
       rect:
         serializedVersion: 2
-        x: 236
-        y: 8
-        width: 16
-        height: 16
+        x: 228
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1272e09b2aa2d5b488af69d743a72afe
-      internalID: -575268485
+      spriteID: 9aad85cc8e185b746ba9e90f809a7d0b
+      internalID: 1595798699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPA_Coins_7
+      name: On (38x38)_7
       rect:
         serializedVersion: 2
-        x: 274
-        y: 8
-        width: 16
-        height: 16
+        x: 266
+        y: 0
+        width: 38
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,92 +284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678105583d7d6bb419d434ec5f67749d
-      internalID: 1614132621
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SPA_Coins_8
-      rect:
-        serializedVersion: 2
-        x: 312
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: afc0362dc212e4449afc31b29b2a41fa
-      internalID: 534933978
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SPA_Coins_9
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eab26dda194d27f42b70ff6ad2b498f3
-      internalID: 176670776
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SPA_Coins_10
-      rect:
-        serializedVersion: 2
-        x: 388
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9805df8172811a3409c3218eedc319bd
-      internalID: -1144023124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SPA_Coins_11
-      rect:
-        serializedVersion: 2
-        x: 426
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 303562fb65375374a98506ed0bc9edfa
-      internalID: 36774347
+      spriteID: 48c8d6d709faee64da2c6819f66ebbc5
+      internalID: 726134218
       vertices: []
       indices: 
       edges: []
@@ -385,18 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SPA_Coins_0: -361040307
-      SPA_Coins_1: -1977122238
-      SPA_Coins_10: -1144023124
-      SPA_Coins_11: 36774347
-      SPA_Coins_2: -391590295
-      SPA_Coins_3: 2002398387
-      SPA_Coins_4: 1039945315
-      SPA_Coins_5: 1733568345
-      SPA_Coins_6: -575268485
-      SPA_Coins_7: 1614132621
-      SPA_Coins_8: 534933978
-      SPA_Coins_9: 176670776
+      On (38x38)_0: -1840263442
+      On (38x38)_1: -376309842
+      On (38x38)_2: -1487203050
+      On (38x38)_3: 256501024
+      On (38x38)_4: -624882714
+      On (38x38)_5: 830450494
+      On (38x38)_6: 1595798699
+      On (38x38)_7: 726134218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
