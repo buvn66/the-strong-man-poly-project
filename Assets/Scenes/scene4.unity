@@ -7027,12 +7027,16 @@ PrefabInstance:
       value: Spikes_1 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8273
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.61451906
       objectReference: {fileID: 0}
     - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 55.98137
+      value: 55.922
       objectReference: {fileID: 0}
     - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8299,12 +8303,16 @@ PrefabInstance:
       value: Spikes_1 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8273
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.57409126
       objectReference: {fileID: 0}
     - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 57.8836
+      value: 57.943
       objectReference: {fileID: 0}
     - target: {fileID: 4669957066733553510, guid: 0ca7467347cc3844a9d60eff1ea3a4c4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -50648,6 +50656,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 812055920}
+    - target: {fileID: 6772116692566760862, guid: 329406492c39c904cbcc69d9127b9901, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6772116692566760862, guid: 329406492c39c904cbcc69d9127b9901, type: 3}
       propertyPath: m_RenderMode
       value: 1
