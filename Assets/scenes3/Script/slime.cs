@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class slime : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     [SerializeField]
     private float leftBoundary = 0f;
     [SerializeField]
@@ -22,28 +22,27 @@ public class slime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //lay vi tri hien tai
+        
         var currentPosition = transform.localPosition;
         if (currentPosition.x > rightBoundary)
         {
-            // neu vi tri hien tai nho hon left thi di chuyen qua right
+            
             isMovingRight = false;
         }
         else if (currentPosition.x < leftBoundary)
         {
-            // neu vi tri hien tai nho hon right thi di chuyen qua left
+            
             isMovingRight = true;
         }
 
 
-        // tu dong di chuyen ngang
-        //(1, 0, 0) * 1 * 0.02 = (0.02, 0, 0)
+      
         var direction = Vector3.right;
         if (isMovingRight == false)
         {
             direction = Vector3.left;
         }
-        //var direction = isMovingRight ? Vector3.right : Vector3.left; //cach viet tat
+        
         transform.Translate(direction * movespeed * Time.deltaTime);
 
         FlipSprite();
