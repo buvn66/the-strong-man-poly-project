@@ -6,6 +6,11 @@ TagManager:
   tags:
   - platform
   - player
+  - background
+  - Spikes
+  - Enemies
+  - Enemes
+  - arrow
   layers:
   - Default
   - TransparentFX
