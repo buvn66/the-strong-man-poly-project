@@ -11,6 +11,8 @@ TagManager:
   - Enemies
   - Enemes
   - arrow
+  - Climbing
+  - Ladder
   layers:
   - Default
   - TransparentFX

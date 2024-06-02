@@ -21,9 +21,6 @@ public class Playercontrols : MonoBehaviour
     [SerializeField]
     private float _jumpForce = 40f;
 
-    //cầu thang
-    [SerializeField] float climbingspeed = 5f;
-
 
     //kiểm tra hướng duy  chuyển của nhân vật 
     private bool isMovingRight = true;
@@ -37,18 +34,21 @@ public class Playercontrols : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
 
     //tham chiếu tới animator
-    private Animator _animator;
+    //private Animator _animator;
+
+    //tham chiếu đến bow và arrow
+    [SerializeField]
+    private GameObject _arrowprefab;
+    [SerializeField]
+    private Transform _bow;
 
     //hàm start dùng để khởi tạo các  giá trị của biến 
-    float _startgravityscale;
-    // Thêm biến moveInput ở đây
-    private Vector2 moveInput; 
     private void Start()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        _startgravityscale = _rigibody2D.gravityScale;
+        //_animator = GetComponent<Animator>();
+
     }
 
 
@@ -57,9 +57,29 @@ public class Playercontrols : MonoBehaviour
     {
         Move();
         Jump();
-        ClimbLander();
+        bow();
     }
 
+
+    //hàm sử lý bow bắng ra được arrow
+    private void bow()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        //nếu người chơi nhấn phím F
+        {
+            //tạo ra viên đạn tại vị trí của súng
+            var arrow = Instantiate(_arrowprefab, _bow.position, Quaternion.identity);
+            //cho viên đạn bay theo hướng của nhân vật
+            var velocity = new Vector3(50f, 0);
+            if (isMovingRight == false)
+            {
+                velocity.x *= -1;
+            }
+            arrow.GetComponent<Rigidbody2D>().velocity = velocity;
+            //huy viên đạn sao 2s
+            Destroy(arrow, 1f);
+        }
+    }
 
     private void Move()
     {
@@ -74,27 +94,25 @@ public class Playercontrols : MonoBehaviour
         {
             //qua phải
             isMovingRight = true;
-            //_animator.SetBool("IsRunning", true);
-            //_animator.SetBool("Isjumping", true);
+            //_animator.SetBool("Isrunning", true);
+            //_animator.SetBool("Isjump", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
-            //_animator.SetBool("IsRunning", false);
-            //_animator.SetBool("Isjumping", false);
+            //_animator.SetBool("Isrunning", false);
+            //_animator.SetBool("Isjump", false);
         }
         else
         {
             //đứng yên 
-            //_animator.SetBool("IsRunning", false);
+            //_animator.SetBool("Isrunning", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
             new Vector2(1f, 1f)
             : new Vector2(-1f, 1);
-        // Gán giá trị cho moveInput
-        moveInput = new Vector2(horizontalInput, Input.GetAxis("Vertical")); 
     }
 
 
@@ -114,16 +132,5 @@ public class Playercontrols : MonoBehaviour
             //_rigidbody2D.AddForce(new Vector2(0, _jumpForce));
             _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
         }
-    }
-    void ClimbLander()
-    {
-        if (!_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
-        {
-            _rigibody2D.gravityScale = _startgravityscale;
-            return;
-        }
-        _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, moveInput.y * climbingspeed);
-        _rigibody2D.gravityScale = 0;
-
     }
 }
