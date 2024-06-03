@@ -168,7 +168,7 @@ public class Playercontrols : MonoBehaviour
             //phát ra tiếng nhạc
             _audioSource.PlayOneShot(_coinCollectSXF);
             //tăng điêm
-            _score += 10;
+            _score += 1;
             //hiểm thị điểm
             _scoreText.text = _score.ToString();
         }
