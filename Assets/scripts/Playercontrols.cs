@@ -70,6 +70,8 @@ public class Playercontrols : MonoBehaviour
     //tham  chiếu hiện số mạng 
     [SerializeField]
     private TextMeshProUGUI _livesText;
+    [SerializeField]
+    private GameObject[] _liveImages;
 
 
 
@@ -84,6 +86,18 @@ public class Playercontrols : MonoBehaviour
         _scoreText.text = _score.ToString();
         //hiển thị mạng
         _livesText.text = _lives.ToString();
+        //hiển thi heart
+        for(int i = 0; i < 3; i++)
+        {
+            if(i < _lives)
+            {
+                _liveImages[i].SetActive(true);
+            }
+            else
+            {
+                _liveImages[i].SetActive(false);
+            }
+        }
     }
 
 
@@ -186,6 +200,18 @@ public class Playercontrols : MonoBehaviour
         else if (other.gameObject.CompareTag("Enemies"))
         {
             _lives -= 1;
+            //hiển thi live images
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < _lives)
+                {
+                    _liveImages[i].SetActive(true);
+                }
+                else
+                {
+                    _liveImages[i].SetActive(false);
+                }
+            }
             if (_lives > 0)
             {
                 //reload game 
