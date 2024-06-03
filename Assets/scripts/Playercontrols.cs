@@ -22,7 +22,7 @@ public class Playercontrols : MonoBehaviour
     private float _jumpForce = 40f;
 
 
-    //kiểm tra hướng duy  chuyển của nhân vật 
+    //kiểm tra hướng duy chuyển của nhân vật 
     private bool isMovingRight = true;
 
 
@@ -36,19 +36,36 @@ public class Playercontrols : MonoBehaviour
     //tham chiếu tới animator
     //private Animator _animator;
 
-    //tham chiếu đến bow và arrow
+    //tham chiếu đến arrow
     [SerializeField]
     private GameObject _arrowprefab;
+
+
+    ////tham chiếu đến bow
     [SerializeField]
     private Transform _bow;
 
+
+    //tham chiếu đến file suond
+    [SerializeField]
+    private AudioClip _coinCollectSXF;
+
+
+    //tham chiếu đến ngồn âm thanh 
+    private AudioSource _audioSource; 
+
+     
+
+
+
+
     //hàm start dùng để khởi tạo các  giá trị của biến 
-    private void Start()
+     void Start()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
         //_animator = GetComponent<Animator>();
-
+        _audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -131,6 +148,17 @@ public class Playercontrols : MonoBehaviour
             //1. tạo lực nhảy lên trên.
             //_rigidbody2D.AddForce(new Vector2(0, _jumpForce));
             _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+       //nếu va chạm với 
+        if (other.gameObject.CompareTag("coins"))
+        {
+            //biến mất đồng xu
+            Destroy(other.gameObject);
+            //phát ra tiếng nhạc
+            _audioSource.PlayOneShot(_coinCollectSXF);
         }
     }
 }
