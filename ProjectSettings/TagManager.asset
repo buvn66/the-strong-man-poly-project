@@ -13,6 +13,7 @@ TagManager:
   - arrow
   - Climbing
   - Ladder
+  - boss
   layers:
   - Default
   - TransparentFX
