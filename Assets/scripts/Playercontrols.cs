@@ -57,9 +57,40 @@ public class Playercontrols : MonoBehaviour
     {
         Move();
         Jump();
+        Fire();
        // ClimbLander();
     }
 
+    private void Fire()
+    {
+        //neu nhan phim F thi ban dan
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+            //tao ra vien dan tai vi tri sung
+           // var oneArrow = Instantiate(arrowPrefabs, arrowTransform.position, Quaternion.identity);
+            //cho vien dan bay theo huong nhan vat
+            //var velocity = new Vector2(50f, 0);
+            //if (_isMovingRight == false)
+            //{
+                //velocity = new Vector2(-50f, 0);
+           // }
+            //oneArrow.GetComponent<Rigidbody2D>().velocity = velocity;
+            //huy vien dan sau 2s
+            //Destroy(oneArrow, 2f);
+        //}
+       // if (Input.GetKey(KeyCode.F))
+        //{
+            _animator.SetBool("isAttacking", true);
+        //}
+        //else if (Input.GetKey(KeyCode.F))
+        //{
+        //    _animator.SetBool("isAttacking", false);
+        //}
+      // else
+        //{
+         //   _animator.SetBool("isAttacking", false);
+       //}
+    }
 
     private void Move()
     {
@@ -74,20 +105,20 @@ public class Playercontrols : MonoBehaviour
         {
             //qua phải
             isMovingRight = true;
-            //_animator.SetBool("Isrunning", true);
+            _animator.SetBool("isRunning", true);
             //_animator.SetBool("Isjump", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("isRunning", false);
             //_animator.SetBool("Isjump", false);
         }
         else
         {
             //đứng yên 
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("isRunning", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
