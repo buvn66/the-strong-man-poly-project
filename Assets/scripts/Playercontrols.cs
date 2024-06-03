@@ -52,20 +52,28 @@ public class Playercontrols : MonoBehaviour
 
 
     //tham chiếu đến ngồn âm thanh 
-    private AudioSource _audioSource; 
+    private AudioSource _audioSource;
 
-     
+
+    //tham chiếu đến TextMeshPro
+    [SerializeField]
+    private TextMeshProUGUI _scoreText;
+    private static int _score = 0;
+
+
 
 
 
 
     //hàm start dùng để khởi tạo các  giá trị của biến 
-     void Start()
+    void Start()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
         //_animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        //hiên thi điểm
+        _scoreText.text = _score.ToString();
     }
 
 
@@ -159,6 +167,10 @@ public class Playercontrols : MonoBehaviour
             Destroy(other.gameObject);
             //phát ra tiếng nhạc
             _audioSource.PlayOneShot(_coinCollectSXF);
+            //tăng điêm
+            _score += 10;
+            //hiểm thị điểm
+            _scoreText.text = _score.ToString();
         }
     }
 }
