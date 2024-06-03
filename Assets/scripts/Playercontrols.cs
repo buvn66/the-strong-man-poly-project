@@ -61,7 +61,15 @@ public class Playercontrols : MonoBehaviour
     private static int _score = 0;
 
 
+    //tham chiếu đên panel gameover     
+    [SerializeField]
+    private GameObject _gameOverpanel;
+    private static int _lives = 3;
 
+
+    //tham  chiếu hiện số mạng 
+    [SerializeField]
+    private TextMeshProUGUI _livesText;
 
 
 
@@ -72,8 +80,10 @@ public class Playercontrols : MonoBehaviour
         _rigibody2D = GetComponent<Rigidbody2D>();
         //_animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-        //hiên thi điểm
+        //hiển thị điểm
         _scoreText.text = _score.ToString();
+        //hiển thị mạng
+        _livesText.text = _lives.ToString();
     }
 
 
@@ -171,6 +181,25 @@ public class Playercontrols : MonoBehaviour
             _score += 1;
             //hiểm thị điểm
             _scoreText.text = _score.ToString();
+        }
+        //nếu va chạm với Enemies
+        else if (other.gameObject.CompareTag("Enemies"))
+        {
+            _lives -= 1;
+            if (_lives > 0)
+            {
+                //reload game 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                //hiển thi số mạng của player lên 
+                _livesText.text = _lives.ToString();
+            }
+            else
+            {
+                //hiện gameover panel
+                _gameOverpanel.SetActive(true);
+                //dừng game 
+                Time.timeScale = 0;
+            }
         }
     }
 }
