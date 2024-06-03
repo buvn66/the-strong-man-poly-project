@@ -83,9 +83,7 @@ public class Playercontrols : MonoBehaviour
         //_animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //hiển thị điểm
-        _scoreText.text = _score.ToString();
-        //hiển thị mạng
-        _livesText.text = _lives.ToString();
+        _scoreText.text = _score.ToString();       
         //hiển thi heart
         for(int i = 0; i < 3; i++)
         {
@@ -215,9 +213,7 @@ public class Playercontrols : MonoBehaviour
             if (_lives > 0)
             {
                 //reload game 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                //hiển thi số mạng của player lên 
-                _livesText.text = _lives.ToString();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);               
             }
             else
             {
