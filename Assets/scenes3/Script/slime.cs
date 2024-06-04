@@ -26,7 +26,7 @@ public class slime : MonoBehaviour
         var currentPosition = transform.localPosition;
         if (currentPosition.x > rightBoundary)
         {
-            
+                
             isMovingRight = false;
         }
         else if (currentPosition.x < leftBoundary)
