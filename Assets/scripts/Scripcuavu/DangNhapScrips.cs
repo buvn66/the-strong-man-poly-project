@@ -29,7 +29,7 @@ public class DangNhapScrips : MonoBehaviour
         var password = edtPassword.text;
 
         // So sánh với tài khoản 
-        if (email.Equals("kieuvu100@gmail.com") && password.Equals("kieuanhvu"))
+        if (email.Equals("khang@gmail.com") && password.Equals("khang"))
         {
             // Load màn chơi 
             SceneManager.LoadScene("Scene1 khang");
