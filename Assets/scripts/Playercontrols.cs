@@ -118,7 +118,7 @@ public class Playercontrols : MonoBehaviour
         else
         {
             //đứng yên 
-            _animator.SetBool("isRunning", false);
+            //_animator.SetBool("isRunning", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
