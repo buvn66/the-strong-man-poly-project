@@ -21,11 +21,8 @@ public class Playercontrols : MonoBehaviour
     [SerializeField]
     private float _jumpForce = 40f;
 
-    //cầu thang
-   // [SerializeField] float climbingspeed = 5f;
 
-
-    //kiểm tra hướng duy  chuyển của nhân vật 
+    //kiểm tra hướng duy chuyển của nhân vật 
     private bool isMovingRight = true;
 
 
@@ -37,18 +34,68 @@ public class Playercontrols : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
 
     //tham chiếu tới animator
-    private Animator _animator;
+    //private Animator _animator;
+
+    //tham chiếu đến arrow
+    [SerializeField]
+    private GameObject _arrowprefab;
+
+
+    ////tham chiếu đến bow
+    [SerializeField]
+    private Transform _bow;
+
+
+    //tham chiếu đến file suond
+    [SerializeField]
+    private AudioClip _coinCollectSXF;
+
+
+    //tham chiếu đến ngồn âm thanh 
+    private AudioSource _audioSource;
+
+
+    //tham chiếu đến TextMeshPro
+    [SerializeField]
+    private TextMeshProUGUI _scoreText;
+    private static int _score = 0;
+
+
+    //tham chiếu đên panel gameover     
+    [SerializeField]
+    private GameObject _gameOverpanel;
+    private static int _lives = 3;
+
+
+    //tham  chiếu hiện số mạng 
+    [SerializeField]
+    private TextMeshProUGUI _livesText;
+    [SerializeField]
+    private GameObject[] _liveImages;
+
+
 
     //hàm start dùng để khởi tạo các  giá trị của biến 
-    float _startgravityscale;
-    // Thêm biến moveInput ở đây
-   // private Vector2 moveInput; 
-    private void Start()
+    void Start()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        _startgravityscale = _rigibody2D.gravityScale;
+        //_animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+        //hiển thị điểm
+        _scoreText.text = _score.ToString();       
+        //hiển thi heart
+        for(int i = 0; i < 3; i++)
+        {
+            if(i < _lives)
+            {
+                _liveImages[i].SetActive(true);
+            }
+            else
+            {
+                _liveImages[i].SetActive(false);
+            }
+        }
     }
 
 
@@ -57,39 +104,28 @@ public class Playercontrols : MonoBehaviour
     {
         Move();
         Jump();
-        Fire();
-       // ClimbLander();
+        bow();
     }
 
-    private void Fire()
+
+    //hàm sử lý bow bắng ra được arrow
+    private void bow()
     {
-        //neu nhan phim F thi ban dan
-        //if (Input.GetKeyDown(KeyCode.F))
-        //{
-            //tao ra vien dan tai vi tri sung
-           // var oneArrow = Instantiate(arrowPrefabs, arrowTransform.position, Quaternion.identity);
-            //cho vien dan bay theo huong nhan vat
-            //var velocity = new Vector2(50f, 0);
-            //if (_isMovingRight == false)
-            //{
-                //velocity = new Vector2(-50f, 0);
-           // }
-            //oneArrow.GetComponent<Rigidbody2D>().velocity = velocity;
-            //huy vien dan sau 2s
-            //Destroy(oneArrow, 2f);
-        //}
-       // if (Input.GetKey(KeyCode.F))
-        //{
-            _animator.SetBool("isAttacking", true);
-        //}
-        //else if (Input.GetKey(KeyCode.F))
-        //{
-        //    _animator.SetBool("isAttacking", false);
-        //}
-      // else
-        //{
-         //   _animator.SetBool("isAttacking", false);
-       //}
+        if (Input.GetKeyDown(KeyCode.F))
+        //nếu người chơi nhấn phím F
+        {
+            //tạo ra viên đạn tại vị trí của súng
+            var arrow = Instantiate(_arrowprefab, _bow.position, Quaternion.identity);
+            //cho viên đạn bay theo hướng của nhân vật
+            var velocity = new Vector3(50f, 0);
+            if (isMovingRight == false)
+            {
+                velocity.x *= -1;
+            }
+            arrow.GetComponent<Rigidbody2D>().velocity = velocity;
+            //huy viên đạn sao 2s
+            Destroy(arrow, 1f);
+        }
     }
 
     private void Move()
@@ -105,27 +141,25 @@ public class Playercontrols : MonoBehaviour
         {
             //qua phải
             isMovingRight = true;
-            _animator.SetBool("isRunning", true);
+            //_animator.SetBool("Isrunning", true);
             //_animator.SetBool("Isjump", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
-            _animator.SetBool("isRunning", false);
+            //_animator.SetBool("Isrunning", false);
             //_animator.SetBool("Isjump", false);
         }
         else
         {
             //đứng yên 
-            //_animator.SetBool("isRunning", false);
+            //_animator.SetBool("Isrunning", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
             new Vector2(1f, 1f)
             : new Vector2(-1f, 1);
-        // Gán giá trị cho moveInput
-        //moveInput = new Vector2(horizontalInput, Input.GetAxis("Vertical")); 
     }
 
 
@@ -146,15 +180,48 @@ public class Playercontrols : MonoBehaviour
             _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
         }
     }
-    //void ClimbLander()
-    //{
-       // if (!_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
-        //{
-          //  _rigibody2D.gravityScale = _startgravityscale;
-            //return;
-       // }
-      //  _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, moveInput.y * climbingspeed);
-       // _rigibody2D.gravityScale = 0;
-
-   // }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+       //nếu va chạm với 
+        if (other.gameObject.CompareTag("coins"))
+        {
+            //biến mất đồng xu
+            Destroy(other.gameObject);
+            //phát ra tiếng nhạc
+            _audioSource.PlayOneShot(_coinCollectSXF);
+            //tăng điêm
+            _score += 1;
+            //hiểm thị điểm
+            _scoreText.text = _score.ToString();
+        }
+        //nếu va chạm với Enemies
+        else if (other.gameObject.CompareTag("Enemies"))
+        {
+            _lives -= 1;
+            //hiển thi live images
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < _lives)
+                {
+                    _liveImages[i].SetActive(true);
+                }
+                else
+                {
+                    _liveImages[i].SetActive(false);
+                }
+            }
+            if (_lives > 0)
+            {
+                //reload game 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);               
+            }
+            else
+            {
+                //hiện gameover panel
+                _gameOverpanel.SetActive(true);
+                //dừng game 
+                Time.timeScale = 0;
+            }
+        }
+    }
 }
