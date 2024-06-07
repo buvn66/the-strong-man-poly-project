@@ -1,62 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Dragoncontrols : MonoBehaviour
+public class Boss : MonoBehaviour
 {
+    //máu của Boss 
+    private float _health = 100;
 
     [SerializeField]
-    private float leftBoundary;
-    [SerializeField]
-    private float rightBoundary;
-    [SerializeField]
-    private float moveSpeed = 1f;
-    [SerializeField]
-    private bool _isMovingRight = true;
-    // Start is called before the first frame update
-    void Start()
+    private Slider _healthSlider;
+  
+    private void Start()
     {
-
+        _healthSlider.value = _health;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        //lấy vị trí hiện tại dragon
-        var currentPosition = transform.localPosition;
-        if (currentPosition.x > rightBoundary)
+        if (other.gameObject.CompareTag("arrow"))
         {
-            //nếu vị trí hiện tại Dragon tboundary 
-            // di chuyển trái
-            _isMovingRight = false;
+            //hủy viên đạn 
+            Destroy(other.gameObject);
+            //mổi lần trung bullet -10 máu của boss  
+            _health -= 1;
+            _healthSlider.value = _health;
+            if (_health <= 0)
+            {
+               
 
-        }
-        else if (currentPosition.x < leftBoundary)
-        {
-            //nếu vị trí hiện tại của Dragon ndary 
-            // di chuyển phải   
-            _isMovingRight = true;
-        }
-
-        //tự động di chuyển ngang
-        var direction = Vector3.right;
-        if (_isMovingRight == false)
-        {
-            direction = Vector3.left;
-        }
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
-        //xoay mặt boss
-        //scale hiện tại
-        var currentScale = transform.localScale;
-        if (_isMovingRight && currentScale.x > 0)
-        {
-            currentScale.x *= -1;
-        }
-        else if (_isMovingRight == false && currentScale.x < 0)
-        {
-            currentScale.x *= -1;
-        }
-        transform.localScale = currentScale;
-
+                Destroy(gameObject);
+            }
         }
     }
+}
