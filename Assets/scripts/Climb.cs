@@ -23,7 +23,7 @@ public class Climb : MonoBehaviour
         {
             isClimbing = true;
             Lad.gravityScale = 0f;
-            _animator.SetBool("isClimbingg", true);
+            _animator.SetBool("IsClimbingg", true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -32,7 +32,7 @@ public class Climb : MonoBehaviour
         {
             isClimbing = false;
             Lad.gravityScale = 1f;
-            _animator.SetBool("isClimbingg", false);
+            _animator.SetBool("IsClimbingg", false);
         }
     }
     private void FixedUpdate()
