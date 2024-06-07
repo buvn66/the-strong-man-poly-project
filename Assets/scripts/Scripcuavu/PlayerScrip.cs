@@ -6,6 +6,10 @@ using TMPro;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody2D rb;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
     public float speed;
     private bool isGround = true;
     private int jumpCount = 0;
@@ -17,24 +21,73 @@ public class PlayerScript : MonoBehaviour
     public ParticleSystem showCoinParticle;
     private bool isFacingRight = true;
     private Animator animator;
+<<<<<<< Updated upstream
+=======
+=======
+    public float speed; // Tốc độ
+    private bool isGround = true; // Kiểm tra xem người chơi có đang đứng trên mặt đất không
+    private int jumpCount = 0; // Số lần nhảy đã thực hiện
+    public int maxJumpCount = 2; // Số lần nhảy tối đa
+    public float jumpForce = 5f;
+    public List<GameObject> bulletPrefabs; // Danh sách các loại đạn
+    public int currentBulletIndex = 0; // Chỉ mục của loại đạn hiện tại
+    public TMP_Text bulletText; // Hiển thị số đạn còn lại 
+    private int bulletCount = 10; // Số đạn còn lại 
+    public TMP_Text coinText; // Hiển thị số đồng xu
+    private int coinCount = 0; // Số đồng xu
+    public ParticleSystem showCoinParticle;
+    private bool isFacingRight = true; // Biến để xác định hướng của nhân vật
+    public float bulletSpeed = 10f; // Tốc độ của viên đạn
+    public int heartCount = 3; // Số tim hiện tại
+    public TMP_Text heartText; // Hiển thị số tim còn lại
+    public Vector3 respawnPosition; // Vị trí hồi sinh
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
 
     void Start()
     {
         InitializeComponents();
+<<<<<<< Updated upstream
         UpdateCoinText();
+=======
+<<<<<<< HEAD
+        UpdateCoinText();
+=======
+        UpdateBulletText();
+        UpdateCoinText();
+        UpdateHeartText();
+        respawnPosition = transform.position; // Đặt vị trí hồi sinh ban đầu là vị trí hiện tại của nhân vật
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
     }
 
     void Update()
     {
         HandleMovement();
         HandleJumping();
+<<<<<<< Updated upstream
 
+=======
+<<<<<<< HEAD
+
+=======
+        HandleShooting();
+        HandleChangeBulletType();
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
     }
 
     void InitializeComponents()
     {
         rb = GetComponent<Rigidbody2D>();
+<<<<<<< Updated upstream
         animator = GetComponent<Animator>();
+=======
+<<<<<<< HEAD
+        animator = GetComponent<Animator>();
+=======
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
     }
 
     void HandleMovement()
@@ -42,10 +95,20 @@ public class PlayerScript : MonoBehaviour
         float moveInput = Input.GetAxis("Horizontal");
         Vector2 moveVelocity = new Vector2(moveInput * speed, rb.velocity.y);
         rb.velocity = moveVelocity;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
 
         bool isRunning = Mathf.Abs(moveInput) > 0;
         animator.SetBool("isRunning", isRunning);
 
+<<<<<<< Updated upstream
+=======
+=======
+        // Xác định hướng di chuyển và cập nhật hình dạng của nhân vật
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
         if (moveInput > 0 && !isFacingRight)
         {
             Flip();
@@ -58,6 +121,10 @@ public class PlayerScript : MonoBehaviour
 
     void HandleJumping()
     {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Kiểm tra nếu nhân vật đang đứng trên mặt đất hoặc chưa đạt tới maxJumpCount
@@ -117,6 +184,57 @@ public class PlayerScript : MonoBehaviour
     }
 
 
+<<<<<<< Updated upstream
+=======
+=======
+        if (Input.GetKeyDown(KeyCode.Space) && (isGround || jumpCount < maxJumpCount))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpCount++;
+        }
+    }
+
+    void HandleShooting()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && bulletCount > 0)
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        Vector3 bulletPosition = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.5f;
+        GameObject selectedBulletPrefab = bulletPrefabs[currentBulletIndex];
+        GameObject bullet = Instantiate(selectedBulletPrefab, bulletPosition, Quaternion.identity);
+
+        // Tính toán hướng bay của viên đạn dựa trên hướng nhìn của nhân vật
+        Vector2 shootDirection = isFacingRight ? Vector2.right : Vector2.left;
+
+        // Lấy component Rigidbody2D của viên đạn để thay đổi vận tốc
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+
+        // Đảm bảo rằng viên đạn không bị ảnh hưởng bởi trọng lực và di chuyển theo hướng mong muốn
+        bulletRb.gravityScale = 0;
+        bulletRb.velocity = shootDirection * bulletSpeed;
+
+        // Hủy viên đạn sau 3 giây
+        Destroy(bullet, 3f);
+
+        bulletCount--;
+        UpdateBulletText();
+    }
+
+    void HandleChangeBulletType()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            currentBulletIndex = (currentBulletIndex + 1) % bulletPrefabs.Count;
+        }
+    }
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -124,6 +242,10 @@ public class PlayerScript : MonoBehaviour
         {
             isGround = true;
             jumpCount = 0;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
             animator.SetBool("IsGrounded", true);
         }
         else if (collision.gameObject.tag == "brick")
@@ -136,6 +258,33 @@ public class PlayerScript : MonoBehaviour
             if (countJumpCoin == 5)
             {
                 Destroy(collision.gameObject);
+<<<<<<< Updated upstream
+=======
+=======
+        }
+        else if (collision.gameObject.tag == "brick")
+        {
+            coinCount++; // Số lượng coin hiện có cộng lên 1
+            coinText.text = coinCount.ToString();
+            showCoinParticle.Play();
+
+            Destroy(collision.gameObject); // Xóa brick sau khi va chạm
+        }
+        else if (collision.gameObject.CompareTag("Spikes"))
+        {
+            heartCount--; // Trừ một tim
+            UpdateHeartText();
+            if (heartCount <= 0)
+            {
+                // Khi tim hết, nhân vật biến mất
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                // Di chuyển nhân vật về vị trí hồi sinh
+                transform.position = respawnPosition;
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
             }
         }
     }
@@ -145,13 +294,34 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             isGround = false;
+<<<<<<< Updated upstream
             animator.SetBool("IsGrounded", false);
+=======
+<<<<<<< HEAD
+            animator.SetBool("IsGrounded", false);
+=======
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+<<<<<<< Updated upstream
         if (other.CompareTag("coinn"))
+=======
+<<<<<<< HEAD
+        if (other.CompareTag("coinn"))
+=======
+        if (other.CompareTag("bulletPickup"))
+        {
+            bulletCount++;
+            UpdateBulletText();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("coinn"))
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
         {
             Animator animator = other.gameObject.GetComponent<Animator>();
             animator.Play("coin_kill");
@@ -162,11 +332,34 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+    void UpdateBulletText()
+    {
+        bulletText.text = bulletCount.ToString();
+    }
+
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
     void UpdateCoinText()
     {
         coinText.text = coinCount.ToString();
     }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+    void UpdateHeartText()
+    {
+        heartText.text = heartCount.ToString();
+    }
+
+    // Phương thức để đảo ngược hình dạng của nhân vật
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
     void Flip()
     {
         isFacingRight = !isFacingRight;

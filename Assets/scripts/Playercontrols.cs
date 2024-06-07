@@ -83,11 +83,19 @@ public class Playercontrols : MonoBehaviour
         //_animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //hiển thị điểm
+<<<<<<< Updated upstream
         _scoreText.text = _score.ToString();
         //hiển thi heart
         for (int i = 0; i < 3; i++)
         {
             if (i < _lives)
+=======
+        _scoreText.text = _score.ToString();       
+        //hiển thi heart
+        for(int i = 0; i < 3; i++)
+        {
+            if(i < _lives)
+>>>>>>> Stashed changes
             {
                 _liveImages[i].SetActive(true);
             }
@@ -182,7 +190,11 @@ public class Playercontrols : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+<<<<<<< Updated upstream
         //nếu va chạm với 
+=======
+       //nếu va chạm với 
+>>>>>>> Stashed changes
         if (other.gameObject.CompareTag("coins"))
         {
             //biến mất đồng xu
@@ -210,6 +222,7 @@ public class Playercontrols : MonoBehaviour
                     _liveImages[i].SetActive(false);
                 }
             }
+<<<<<<< Updated upstream
             //reload game 
             if (_lives > 0)
             {
@@ -245,6 +258,12 @@ public class Playercontrols : MonoBehaviour
             {
                 //reload game 
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+=======
+            if (_lives > 0)
+            {
+                //reload game 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);               
+>>>>>>> Stashed changes
             }
             else
             {
@@ -254,6 +273,7 @@ public class Playercontrols : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+<<<<<<< Updated upstream
         // đụng vào bẫy
         else if (other.gameObject.CompareTag("trap"))
         {
@@ -284,5 +304,7 @@ public class Playercontrols : MonoBehaviour
             }
         }
 
+=======
+>>>>>>> Stashed changes
     }
 }

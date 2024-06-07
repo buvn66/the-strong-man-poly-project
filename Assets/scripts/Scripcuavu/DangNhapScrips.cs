@@ -29,7 +29,15 @@ public class DangNhapScrips : MonoBehaviour
         var password = edtPassword.text;
 
         // So sánh với tài khoản 
+<<<<<<< Updated upstream
         if (email.Equals("khang@gmail.com") && password.Equals("khang"))
+=======
+<<<<<<< HEAD
+        if (email.Equals("kieuvu100@gmail.com") && password.Equals("kieuanhvu"))
+=======
+        if (email.Equals("khang@gmail.com") && password.Equals("khang"))
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
+>>>>>>> Stashed changes
         {
             // Load màn chơi 
             SceneManager.LoadScene("Scene1 khang");
