@@ -20,7 +20,7 @@ public class Enemiescript : MonoBehaviour
     void Start()
     {
         // Tìm đối tượng nhân vật (Player)
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Boss").transform;
         // Cập nhật số coin lên TMPro
         UpdateCoinText();
     }

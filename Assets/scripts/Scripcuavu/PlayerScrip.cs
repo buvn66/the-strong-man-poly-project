@@ -88,7 +88,8 @@ public class PlayerScript : MonoBehaviour
         // Lấy component Rigidbody2D của viên đạn để thay đổi vận tốc
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
 
-        // Thay đổi vận tốc của viên đạn để nó di chuyển theo hướng mong muốn
+        // Đảm bảo rằng viên đạn không bị ảnh hưởng bởi trọng lực và di chuyển theo hướng mong muốn
+        bulletRb.gravityScale = 0;
         bulletRb.velocity = shootDirection * bulletSpeed;
 
         // Hủy viên đạn sau 3 giây

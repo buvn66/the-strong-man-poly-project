@@ -214,7 +214,7 @@ MonoBehaviour:
   start: -2.19
   end: 4.07
   followDistance: 3
-  coinPrefab: {fileID: 0}
+  coinPrefab: {fileID: 3070642890468055562, guid: 708a8ed68f813d94ab929b73ddb025d2, type: 3}
   minCoinCount: 1
   maxCoinCount: 3
   coinText: {fileID: 0}
