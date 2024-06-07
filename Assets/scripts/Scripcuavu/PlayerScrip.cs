@@ -17,12 +17,12 @@ public class PlayerScript : MonoBehaviour
     private int bulletCount = 10; // Số đạn còn lại 
     public TMP_Text coinText; // Hiển thị số đồng xu
     private int coinCount = 0; // Số đồng xu
-    public int countJumpCoin = 0;
     public ParticleSystem showCoinParticle;
     private bool isFacingRight = true; // Biến để xác định hướng của nhân vật
     public float bulletSpeed = 10f; // Tốc độ của viên đạn
     public int heartCount = 3; // Số tim hiện tại
     public TMP_Text heartText; // Hiển thị số tim còn lại
+    public Vector3 respawnPosition; // Vị trí hồi sinh
 
     void Start()
     {
@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour
         UpdateBulletText();
         UpdateCoinText();
         UpdateHeartText();
+        respawnPosition = transform.position; // Đặt vị trí hồi sinh ban đầu là vị trí hiện tại của nhân vật
     }
 
     void Update()
@@ -119,19 +120,13 @@ public class PlayerScript : MonoBehaviour
         }
         else if (collision.gameObject.tag == "brick")
         {
-            countJumpCoin++;//check số lần nhẩy lên aen coin 
-
-            coinCount++;//số lượng coin hiện có cộng lên 1
-
-            coinText.text = coinCount + "";
+            coinCount++; // Số lượng coin hiện có cộng lên 1
+            coinText.text = coinCount.ToString();
             showCoinParticle.Play();
 
-            if (countJumpCoin == 5)
-            {
-                Destroy(collision.gameObject);
-            }
+            Destroy(collision.gameObject); // Xóa brick sau khi va chạm
         }
-        else if (collision.gameObject.tag == "Spikes")
+        else if (collision.gameObject.CompareTag("Spikes"))
         {
             heartCount--; // Trừ một tim
             UpdateHeartText();
@@ -140,8 +135,14 @@ public class PlayerScript : MonoBehaviour
                 // Khi tim hết, nhân vật biến mất
                 gameObject.SetActive(false);
             }
+            else
+            {
+                // Di chuyển nhân vật về vị trí hồi sinh
+                transform.position = respawnPosition;
+            }
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
@@ -157,8 +158,6 @@ public class PlayerScript : MonoBehaviour
             bulletCount++;
             UpdateBulletText();
             Destroy(other.gameObject);
-            // Xác định hướng của nhân vật
-
         }
         else if (other.CompareTag("coinn"))
         {
@@ -169,7 +168,6 @@ public class PlayerScript : MonoBehaviour
             UpdateCoinText();
             Destroy(other.gameObject, 0.57f);
         }
-
     }
 
     void UpdateBulletText()
