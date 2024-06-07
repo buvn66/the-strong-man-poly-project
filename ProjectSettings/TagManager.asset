@@ -3,7 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< HEAD
   tags: []
+=======
+  tags:
+  - platform
+  - player
+  - background
+  - Spikes
+  - Enemies
+  - Enemes
+  - arrow
+  - Climbing
+  - Ladder
+  - boss
+  - coins
+  - Boss
+  - coinn
+  - UI
+>>>>>>> parent of c5b48b4 (mini boss)
   layers:
   - Default
   - TransparentFX
