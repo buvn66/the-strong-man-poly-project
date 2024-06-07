@@ -223,5 +223,33 @@ public class Playercontrols : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+        else if (other.gameObject.CompareTag("boss"))
+        {
+            _lives -= 1;
+            //hiển thi live images
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < _lives)
+                {
+                    _liveImages[i].SetActive(true);
+                }
+                else
+                {
+                    _liveImages[i].SetActive(false);
+                }
+            }
+            if (_lives > 0)
+            {
+                //reload game 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else
+            {
+                //hiện gameover panel
+                _gameOverpanel.SetActive(true);
+                //dừng game 
+                Time.timeScale = 0;
+            }
+        }
     }
 }
