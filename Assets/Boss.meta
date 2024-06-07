@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Boss.meta
 guid: 0bfd871570177d84ba4ae428968d7f85
+========
+guid: bdb461d73107413409df4d71c91ebeca
+>>>>>>>> Stashed changes:Assets/prefabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

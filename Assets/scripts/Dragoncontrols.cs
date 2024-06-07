@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+<<<<<<< Updated upstream
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,12 @@ public class Boss : MonoBehaviour
 
     [SerializeField]
     private Slider _healthSlider;
+=======
+using UnityEngine;
+
+public class Dragoncontrols : MonoBehaviour
+{
+>>>>>>> Stashed changes
 
     [SerializeField]
     private float leftBoundary;
@@ -20,6 +27,7 @@ public class Boss : MonoBehaviour
     private float moveSpeed = 1f;
     [SerializeField]
     private bool _isMovingRight = true;
+<<<<<<< Updated upstream
 
     private void Start()
     {
@@ -49,13 +57,33 @@ public class Boss : MonoBehaviour
         if (currentPosition.x > rightBoundary)
         {
             //nếu vị trí hiện tại  < rightboundary 
+=======
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //lấy vị trí hiện tại dragon
+        var currentPosition = transform.localPosition;
+        if (currentPosition.x > rightBoundary)
+        {
+            //nếu vị trí hiện tại Dragon tboundary 
+>>>>>>> Stashed changes
             // di chuyển trái
             _isMovingRight = false;
 
         }
         else if (currentPosition.x < leftBoundary)
         {
+<<<<<<< Updated upstream
             //nếu vị trí hiện tại  < leftboundary 
+=======
+            //nếu vị trí hiện tại của Dragon ndary 
+>>>>>>> Stashed changes
             // di chuyển phải   
             _isMovingRight = true;
         }
@@ -67,7 +95,11 @@ public class Boss : MonoBehaviour
             direction = Vector3.left;
         }
         transform.Translate(direction * moveSpeed * Time.deltaTime);
+<<<<<<< Updated upstream
         //xoay mặt 
+=======
+        //xoay mặt boss
+>>>>>>> Stashed changes
         //scale hiện tại
         var currentScale = transform.localScale;
         if (_isMovingRight && currentScale.x > 0)
@@ -80,5 +112,10 @@ public class Boss : MonoBehaviour
         }
         transform.localScale = currentScale;
 
+<<<<<<< Updated upstream
     }
 }
+=======
+        }
+    }
+>>>>>>> Stashed changes

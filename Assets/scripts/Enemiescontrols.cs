@@ -12,6 +12,7 @@ public class Enemiescontrols : MonoBehaviour
     private float moveSpeed = 1f;
     [SerializeField]
     private bool _isMovingRight = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,43 +22,43 @@ public class Enemiescontrols : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //lấy vị trí hiện tại của ốc
+        // Lấy vị trí hiện tại của quái vật
         var currentPosition = transform.localPosition;
+
         if (currentPosition.x > rightBoundary)
         {
-            //nếu vị trí hiện tại của ốc < rightboundary 
-            // di chuyển trái
+            // Nếu vị trí hiện tại của quái vật > rightBoundary, di chuyển trái
             _isMovingRight = false;
-
         }
         else if (currentPosition.x < leftBoundary)
         {
-            //nếu vị trí hiện tại của ốc < leftboundary 
-            // di chuyển phải   
+            // Nếu vị trí hiện tại của quái vật < leftBoundary, di chuyển phải
             _isMovingRight = true;
         }
 
-        //tự động di chuyển ngang
+        // Tự động di chuyển ngang
         var direction = Vector3.right;
-        if (_isMovingRight == false)
+        if (!_isMovingRight)
         {
             direction = Vector3.left;
         }
+
         transform.Translate(direction * moveSpeed * Time.deltaTime);
-        //xoay mặt enemies
-        //scale hiện tại
+
+        // Xoay mặt quái vật theo hướng di chuyển
+        // Scale hiện tại
         var currentScale = transform.localScale;
-        if (_isMovingRight && currentScale.x > 0)
+        if (_isMovingRight && currentScale.x < 0)
         {
-            currentScale.x *= -1;
+            currentScale.x = Mathf.Abs(currentScale.x);
         }
-        else if (_isMovingRight == false && currentScale.x < 0)
+        else if (!_isMovingRight && currentScale.x > 0)
         {
-            currentScale.x *= -1;
+            currentScale.x = -Mathf.Abs(currentScale.x);
         }
         transform.localScale = currentScale;
-
     }
+<<<<<<< HEAD
 
 
     //giết enemies làm biến mất viên đạn 
@@ -72,3 +73,6 @@ public class Enemiescontrols : MonoBehaviour
         }
     }
 }
+=======
+}
+>>>>>>> 5209313c992587e0ab42d7809a9cc8c5dfcb913a
