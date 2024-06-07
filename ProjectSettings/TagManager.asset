@@ -10,6 +10,8 @@ TagManager:
   - Boss
   - Ladder
   - water
+  - bulet
+  - bulletPickup
   layers:
   - Default
   - TransparentFX
