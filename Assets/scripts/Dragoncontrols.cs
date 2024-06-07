@@ -31,12 +31,11 @@ public class Boss : MonoBehaviour
         {
             //hủy viên đạn 
             Destroy(other.gameObject);
-            //mổi lần trung bullet -10 máu của boss  
+            //mổi lần trung arrow -10 máu của boss  
             _health -= 1;
             _healthSlider.value = _health;
             if (_health <= 0)
-            {
-               
+            {               
 
                 Destroy(gameObject);
             }
@@ -45,18 +44,18 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        //lấy vị trí hiện tại của ốc
+        //lấy vị trí hiện tại 
         var currentPosition = transform.localPosition;
         if (currentPosition.x > rightBoundary)
         {
-            //nếu vị trí hiện tại của ốc < rightboundary 
+            //nếu vị trí hiện tại  < rightboundary 
             // di chuyển trái
             _isMovingRight = false;
 
         }
         else if (currentPosition.x < leftBoundary)
         {
-            //nếu vị trí hiện tại của ốc < leftboundary 
+            //nếu vị trí hiện tại  < leftboundary 
             // di chuyển phải   
             _isMovingRight = true;
         }
@@ -68,7 +67,7 @@ public class Boss : MonoBehaviour
             direction = Vector3.left;
         }
         transform.Translate(direction * moveSpeed * Time.deltaTime);
-        //xoay mặt enemies
+        //xoay mặt 
         //scale hiện tại
         var currentScale = transform.localScale;
         if (_isMovingRight && currentScale.x > 0)

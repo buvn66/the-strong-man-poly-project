@@ -18,6 +18,8 @@ TagManager:
   - Boss
   - coinn
   - UI
+  - ground
+  - trap
   layers:
   - Default
   - TransparentFX
