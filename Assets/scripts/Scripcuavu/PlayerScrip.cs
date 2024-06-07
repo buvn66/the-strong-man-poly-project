@@ -21,12 +21,15 @@ public class PlayerScript : MonoBehaviour
     public ParticleSystem showCoinParticle;
     private bool isFacingRight = true; // Biến để xác định hướng của nhân vật
     public float bulletSpeed = 10f; // Tốc độ của viên đạn
+    public int heartCount = 3; // Số tim hiện tại
+    public TMP_Text heartText; // Hiển thị số tim còn lại
 
     void Start()
     {
         InitializeComponents();
         UpdateBulletText();
         UpdateCoinText();
+        UpdateHeartText();
     }
 
     void Update()
@@ -128,6 +131,16 @@ public class PlayerScript : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+        else if (collision.gameObject.tag == "Spikes")
+        {
+            heartCount--; // Trừ một tim
+            UpdateHeartText();
+            if (heartCount <= 0)
+            {
+                // Khi tim hết, nhân vật biến mất
+                gameObject.SetActive(false);
+            }
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -168,6 +181,12 @@ public class PlayerScript : MonoBehaviour
     {
         coinText.text = coinCount.ToString();
     }
+
+    void UpdateHeartText()
+    {
+        heartText.text = heartCount.ToString();
+    }
+
     // Phương thức để đảo ngược hình dạng của nhân vật
     void Flip()
     {
