@@ -39,11 +39,12 @@ public class Dragoncontrols : MonoBehaviour
         {
             //hủy viên đạn 
             Destroy(other.gameObject);
-            //mổi lần trung arrow -10 máu của boss  
+            //mổi lần trung bullet -10 máu của boss  
             _health -= 1;
             _healthSlider.value = _health;
             if (_health <= 0)
-            {               
+            {
+               
 
                 Destroy(gameObject);
             }
@@ -52,10 +53,11 @@ public class Dragoncontrols : MonoBehaviour
 
     void Update()
     {
-        //lấy vị trí hiện tại 
+        //lấy vị trí hiện tại của ốc
         var currentPosition = transform.localPosition;
         if (currentPosition.x > rightBoundary)
         {
+<<<<<<< HEAD
             //nếu vị trí hiện tại  < rightboundary 
 =======
     // Start is called before the first frame update
@@ -73,17 +75,24 @@ public class Dragoncontrols : MonoBehaviour
         {
             //nếu vị trí hiện tại Dragon tboundary 
 >>>>>>> Stashed changes
+=======
+            //nếu vị trí hiện tại của ốc < rightboundary 
+>>>>>>> parent of c5b48b4 (mini boss)
             // di chuyển trái
             _isMovingRight = false;
 
         }
         else if (currentPosition.x < leftBoundary)
         {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             //nếu vị trí hiện tại  < leftboundary 
 =======
             //nếu vị trí hiện tại của Dragon ndary 
 >>>>>>> Stashed changes
+=======
+            //nếu vị trí hiện tại của ốc < leftboundary 
+>>>>>>> parent of c5b48b4 (mini boss)
             // di chuyển phải   
             _isMovingRight = true;
         }
@@ -95,11 +104,15 @@ public class Dragoncontrols : MonoBehaviour
             direction = Vector3.left;
         }
         transform.Translate(direction * moveSpeed * Time.deltaTime);
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         //xoay mặt 
 =======
         //xoay mặt boss
 >>>>>>> Stashed changes
+=======
+        //xoay mặt enemies
+>>>>>>> parent of c5b48b4 (mini boss)
         //scale hiện tại
         var currentScale = transform.localScale;
         if (_isMovingRight && currentScale.x > 0)

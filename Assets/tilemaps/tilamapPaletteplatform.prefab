@@ -49,10 +49,10 @@ Tilemap:
       m_TileIndex: 48
       m_TileSpriteIndex: 48
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
+      m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741827
+      m_AllTileFlags: 1073741825
   - first: {x: 1, y: -10, z: 0}
     second:
       serializedVersion: 2
@@ -102,10 +102,10 @@ Tilemap:
       m_TileIndex: 47
       m_TileSpriteIndex: 47
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741827
+      m_AllTileFlags: 1073741825
   - first: {x: 1, y: -9, z: 0}
     second:
       serializedVersion: 2
@@ -238,6 +238,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - first: {x: 1, y: -5, z: 0}
     second:
@@ -261,6 +262,8 @@ Tilemap:
       m_AllTileFlags: 1073741825
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of c5b48b4 (mini boss)
   - first: {x: 3, y: -5, z: 0}
     second:
       serializedVersion: 2
@@ -321,6 +324,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - first: {x: 2, y: -3, z: 0}
     second:
@@ -334,6 +338,8 @@ Tilemap:
       m_AllTileFlags: 1073741825
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of c5b48b4 (mini boss)
   - first: {x: 3, y: -3, z: 0}
     second:
       serializedVersion: 2
@@ -560,6 +566,7 @@ Tilemap:
       m_TileIndex: 3
       m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -571,6 +578,12 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
 >>>>>>> Stashed changes
+=======
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+>>>>>>> parent of c5b48b4 (mini boss)
   - first: {x: 6, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -590,7 +603,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 6b79cecd726caaf428e8cd27cedc328e, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 11400000, guid: 15c8a836be25c684b88118155b3603aa, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 823190ac712b37d47b19058f62ea7d17, type: 2}
   - m_RefCount: 1
@@ -679,8 +692,9 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 0e34cfc0106a3b74dba887465f755e8a, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 11400000, guid: 7b74fdbae48096a4c89fc2a8633dcd6e, type: 2}
   - m_RefCount: 1
+<<<<<<< HEAD
     m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 15c8a836be25c684b88118155b3603aa, type: 2}
@@ -690,6 +704,9 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: fdae93264e3bc1f40977e00ee58715f5, type: 2}
 =======
 >>>>>>> Stashed changes
+=======
+    m_Data: {fileID: 11400000, guid: 88c2a5a90dbd2de4e9b9fa5c0d87d8a4, type: 2}
+>>>>>>> parent of c5b48b4 (mini boss)
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 0f6b508980f202544b215701ae0d8392, type: 3}
@@ -698,7 +715,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: a5e3eab31ccf43444ab168bc12e9bd20, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 21300000, guid: c3f84f9469544ce4e8a944c31fca2134, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 4041a84217d56f5489a2da52ef292aa8, type: 3}
   - m_RefCount: 1
@@ -787,21 +804,19 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300036, guid: 020a14f5296ce884aa7d029304ceff5f, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 21300000, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: c3f84f9469544ce4e8a944c31fca2134, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: bcd7940ef8065e04aae3ccffd7c1d2f7, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 37a7a6da37838944f978a69307f273d0, type: 3}
+    m_Data: {fileID: 21300000, guid: ae9601efa341c8e46881ed773ca69bb3, type: 3}
   m_TileMatrixArray:
+<<<<<<< HEAD
   - m_RefCount: 52
 =======
   m_TileMatrixArray:
   - m_RefCount: 43
 >>>>>>> Stashed changes
+=======
+  - m_RefCount: 49
+>>>>>>> parent of c5b48b4 (mini boss)
     m_Data:
       e00: 1
       e01: 0
@@ -826,12 +841,6 @@ Tilemap:
   - m_RefCount: 43
 >>>>>>> Stashed changes
     m_Data: {r: 1, g: 1, b: 1, a: 1}
-  - m_RefCount: 1
-    m_Data: {r: 0.94440997, g: 0.62226665, b: 0.6853069, a: 1}
-  - m_RefCount: 1
-    m_Data: {r: 0.8549621, g: 0.5279943, b: 0.5805814, a: 1}
-  - m_RefCount: 1
-    m_Data: {r: 0.8140882, g: 0.56825703, b: 0.5770334, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -950,11 +959,15 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!114 &2166680673149033803
 =======
 --- !u!114 &3304803530241528466
 >>>>>>> Stashed changes
+=======
+--- !u!114 &155900114493904191
+>>>>>>> parent of c5b48b4 (mini boss)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

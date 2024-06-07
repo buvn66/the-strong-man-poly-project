@@ -83,11 +83,16 @@ public class Playercontrols : MonoBehaviour
         //_animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //hiển thị điểm
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         _scoreText.text = _score.ToString();
+=======
+        _scoreText.text = _score.ToString();       
+>>>>>>> parent of c5b48b4 (mini boss)
         //hiển thi heart
-        for (int i = 0; i < 3; i++)
+        for(int i = 0; i < 3; i++)
         {
+<<<<<<< HEAD
             if (i < _lives)
 =======
         _scoreText.text = _score.ToString();       
@@ -96,6 +101,9 @@ public class Playercontrols : MonoBehaviour
         {
             if(i < _lives)
 >>>>>>> Stashed changes
+=======
+            if(i < _lives)
+>>>>>>> parent of c5b48b4 (mini boss)
             {
                 _liveImages[i].SetActive(true);
             }
@@ -190,11 +198,15 @@ public class Playercontrols : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         //nếu va chạm với 
 =======
        //nếu va chạm với 
 >>>>>>> Stashed changes
+=======
+       //nếu va chạm với 
+>>>>>>> parent of c5b48b4 (mini boss)
         if (other.gameObject.CompareTag("coins"))
         {
             //biến mất đồng xu
@@ -222,14 +234,16 @@ public class Playercontrols : MonoBehaviour
                     _liveImages[i].SetActive(false);
                 }
             }
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             //reload game 
+=======
+>>>>>>> parent of c5b48b4 (mini boss)
             if (_lives > 0)
             {
                 //reload game 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);               
             }
-            //hiện gameover panel
             else
             {
                 //hiện gameover panel
@@ -238,7 +252,6 @@ public class Playercontrols : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
-        //đụng vào boss
         else if (other.gameObject.CompareTag("boss"))
         {
             _lives -= 1;
@@ -273,6 +286,7 @@ public class Playercontrols : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         // đụng vào bẫy
         else if (other.gameObject.CompareTag("trap"))
@@ -306,5 +320,7 @@ public class Playercontrols : MonoBehaviour
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of c5b48b4 (mini boss)
     }
 }
