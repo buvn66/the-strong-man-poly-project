@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Enemiescript : MonoBehaviour
+public class quaiScrip : MonoBehaviour
 {
     public float moveSpeed = 2f; // Tốc độ di chuyển của quái
     private Transform player; // Đối tượng nhân vật (Player)
@@ -20,7 +20,7 @@ public class Enemiescript : MonoBehaviour
     void Start()
     {
         // Tìm đối tượng nhân vật (Player)
-        player = GameObject.FindGameObjectWithTag("Boss").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         // Cập nhật số coin lên TMPro
         UpdateCoinText();
     }
@@ -117,6 +117,6 @@ public class Enemiescript : MonoBehaviour
     void UpdateCoinText()
     {
         // Cập nhật số coin lên TextMeshPro
-        coinText.text = coinCount.ToString();   
+        coinText.text = coinCount.ToString();
     }
 }

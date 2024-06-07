@@ -70,7 +70,7 @@ public class PlayerScript : MonoBehaviour
 
     void HandleShooting()
     {
-        if (Input.GetKeyDown(KeyCode.B) && bulletCount > 0)
+        if (Input.GetKeyDown(KeyCode.F) && bulletCount > 0)
         {
             Shoot();
         }
