@@ -1,18 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class gate : MonoBehaviour
+
+public class Gate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            //chuyển màng chơi
+            SceneManager.LoadScene(2);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }
