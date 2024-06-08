@@ -209,8 +209,10 @@ public class Playercontrols : MonoBehaviour
         //nếu va chạm với Enemies
         else if (other.gameObject.CompareTag("Enemies"))
         {
+            //bat su kien Player cham spikes
+            //mat 1 mang va reload lai man choi
             _lives -= 1;
-            //hiển thi live images
+            // xoa di 1 anh
             for (int i = 0; i < 3; i++)
             {
                 if (i < _lives)
@@ -221,18 +223,50 @@ public class Playercontrols : MonoBehaviour
                 {
                     _liveImages[i].SetActive(false);
                 }
+
             }
-            if (_lives > 0)
+            if (_lives < 1)
             {
-                //reload game 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);               
+                //Hien ra thong bao GameOver
+                _gameOverpanel.SetActive(true);
+                //Dung game
+                Time.timeScale = 0;
             }
             else
             {
-                //hiện gameover panel
+                // reload lai man choi hien tai
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+        else if (other.gameObject.CompareTag("Spikes"))
+        {
+            //bat su kien Player cham spikes
+            //mat 1 mang va reload lai man choi
+            _lives -= 1;
+            // xoa di 1 anh
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < _lives)
+                {
+                    _liveImages[i].SetActive(true);
+                }
+                else
+                {
+                    _liveImages[i].SetActive(false);
+                }
+
+            }
+            if (_lives < 1)
+            {
+                //Hien ra thong bao GameOver
                 _gameOverpanel.SetActive(true);
-                //dừng game 
+                //Dung game
                 Time.timeScale = 0;
+            }
+            else
+            {
+                // reload lai man choi hien tai
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
     }
