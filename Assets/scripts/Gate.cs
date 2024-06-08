@@ -12,7 +12,7 @@ public class Gate : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //chuyển màng chơi
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(3);
 
         }
     }

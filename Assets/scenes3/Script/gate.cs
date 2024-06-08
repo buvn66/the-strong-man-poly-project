@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class Gate : MonoBehaviour
+public class gate : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
