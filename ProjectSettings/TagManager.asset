@@ -6,6 +6,9 @@ TagManager:
   tags:
   - platform
   - player
+<<<<<<< HEAD
+  - coin
+=======
   - background
   - Spikes
   - Enemies
@@ -18,6 +21,7 @@ TagManager:
   - Boss
   - coinn
   - UI
+>>>>>>> main
   layers:
   - Default
   - TransparentFX
