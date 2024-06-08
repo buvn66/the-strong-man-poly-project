@@ -63,7 +63,7 @@ public class Enemiescontrols : MonoBehaviour
     //giết enemies làm biến mất viên đạn 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("bullet"))
+        if (collision.gameObject.CompareTag("arrow"))
         {
             //nếu chạm tới viên đạn thì chết
             Destroy(gameObject);
