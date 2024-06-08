@@ -6,6 +6,7 @@ TagManager:
   tags:
   - platform
   - player
+  - coin
   layers:
   - Default
   - TransparentFX
