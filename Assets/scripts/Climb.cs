@@ -9,13 +9,13 @@ public class Climb : MonoBehaviour
     private bool isClimbing = false;
 
     //Animation
-    private Animator _animator;
+    //private Animator _animator;
 
     // Start is called before the first frame update
     void Start()
     {
         Lad = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,7 +23,7 @@ public class Climb : MonoBehaviour
         {
             isClimbing = true;
             Lad.gravityScale = 0f;
-            _animator.SetBool("isClimbingg", true);
+            //_animator.SetBool("isClimbingg", true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -32,7 +32,7 @@ public class Climb : MonoBehaviour
         {
             isClimbing = false;
             Lad.gravityScale = 1f;
-            _animator.SetBool("isClimbingg", false);
+            //_animator.SetBool("isClimbingg", false);
         }
     }
     private void FixedUpdate()
