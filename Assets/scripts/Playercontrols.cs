@@ -105,7 +105,7 @@ public class Playercontrols : MonoBehaviour
         Move();
         Jump();
         bow();
-        FlipSprite();
+       
     }
 
 
@@ -225,10 +225,5 @@ public class Playercontrols : MonoBehaviour
             }
         }
     }
-    private void FlipSprite()
-    {
-        transform.localScale = isMovingRight ?
-            new Vector2(1f, 1f)
-            : new Vector2(-1f, 1f);
-    }
+   
 }
