@@ -125,13 +125,6 @@ public class PlayerScript : MonoBehaviour
             jumpCount = 0;
             animator.SetBool("leocau", false);
         }
-        else if (collision.gameObject.CompareTag("brick"))
-        {
-            coinCount++;
-            coinText.text = coinCount.ToString();
-            showCoinParticle.Play();
-            Destroy(collision.gameObject);
-        }
         else if (collision.gameObject.CompareTag("Spikes"))
         {
             heartCount--;
@@ -143,6 +136,19 @@ public class PlayerScript : MonoBehaviour
             else
             {
                 transform.position = respawnPosition;
+            }
+        }
+        else if (collision.gameObject.CompareTag("Boss")) // Xử lý va chạm với quái
+        {
+            heartCount--; // Giảm máu khi đụng quái
+            UpdateHeartText(); // Cập nhật hiển thị máu trên thanh text
+            if (heartCount <= 0)
+            {
+                gameObject.SetActive(false); // Nếu máu hết, vô hiệu hóa nhân vật
+            }
+            else
+            {
+                transform.position = respawnPosition; // Quay lại điểm xuất phát nếu chưa hết máu
             }
         }
     }

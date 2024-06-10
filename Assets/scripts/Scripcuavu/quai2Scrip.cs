@@ -22,7 +22,8 @@ public class quai2Scrip : MonoBehaviour
 
     private int hitCount = 0; // Biến đếm số lần trúng đạn
     private int maxHits = 3; // Số lần trúng đạn tối đa trước khi chết
-    private bool isHit = false; // Trạng thái khi quái vật bị hit
+    private bool isAttacking = false; // Trạng thái tấn công của quái vật
+
     void Start()
     {
         // Tìm đối tượng nhân vật (Player)
@@ -38,11 +39,7 @@ public class quai2Scrip : MonoBehaviour
         // Kiểm tra xem quái vật có bị trúng đạn không
         if (isDead)
         {
-            // Chuyển sang trạng thái death
-            animator.SetTrigger("Death");
-            // Di chuyển quái vật xuống dưới
-            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
-            return;
+            return; // Quái vật đã chết, không thực hiện thêm hành động nào
         }
 
         // Kiểm tra xem nhân vật có tồn tại không
@@ -54,28 +51,31 @@ public class quai2Scrip : MonoBehaviour
             // Kiểm tra xem nhân vật có nằm trong khoảng cách để bắt đầu đuổi không
             if (distanceToPlayer <= followDistance)
             {
-                // Chuyển sang trạng thái đuổi theo và chạy nhanh hơn
-                animator.SetBool("isMoving", true);
                 Vector3 directionToPlayer = (player.position - transform.position).normalized;
                 transform.Translate(directionToPlayer * chaseSpeed * Time.deltaTime);
 
                 // Kiểm tra xem có đủ gần để tấn công không
-                if (distanceToPlayer <= 1f) // Ví dụ khoảng cách tấn công là 1 đơn vị
+                if (distanceToPlayer <= 1f && !isAttacking) // Ví dụ khoảng cách tấn công là 1 đơn vị
                 {
-                    animator.SetTrigger("attack");
+                    StartCoroutine(AttackPlayer());
                 }
 
                 return;
-            }
-            else
-            {
-                // Chuyển sang trạng thái di chuyển bình thường
-                animator.SetBool("isMoving", false);
             }
         }
 
         // Di chuyển con quái giữa hai điểm start và end
         MoveBetweenPoints();
+    }
+
+    // Coroutine để tấn công nhân vật với delay
+    IEnumerator AttackPlayer()
+    {
+        isAttacking = true;
+        animator.SetTrigger("attack");
+        // Thực hiện tấn công nhân vật ở đây nếu cần
+        yield return new WaitForSeconds(2f); // Delay giữa các lần tấn công
+        isAttacking = false;
     }
 
     // Hàm di chuyển con quái giữa hai điểm start và end
@@ -114,7 +114,6 @@ public class quai2Scrip : MonoBehaviour
         }
 
         transform.localScale = scaleBoss;
-        animator.SetBool("isMoving", true);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -123,20 +122,20 @@ public class quai2Scrip : MonoBehaviour
         {
             // Tăng số lần trúng đạn
             hitCount++;
+            Debug.Log("Hit count: " + hitCount);
 
             if (hitCount >= maxHits)
             {
-                // Chuyển sang trạng thái bị trúng đạn
+                // Chuyển sang trạng thái bị trúng đạn và chết
                 isDead = true;
-                animator.SetTrigger("hit");
-
-                BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>(); // Đạn bắn quái sẽ rơi xuống
-                collider.isTrigger = true;
+                animator.SetTrigger("death");
+                Debug.Log("Quái vật đã chết");
 
                 // Sinh ra coin 
                 DropCoin();
-                // Hủy quái vật
-                Destroy(gameObject, 2f);
+
+                // Bắt đầu coroutine để ẩn quái vật sau khi animation chết kết thúc
+                StartCoroutine(AfterDeath());
             }
             else
             {
@@ -145,16 +144,24 @@ public class quai2Scrip : MonoBehaviour
             }
         }
     }
+    //IEnumerator:một phương pháp cho phép bạn tạm dừng thực thi một hàm tại một điểm cụ thể và sau đó tiếp tục lại từ điểm đó trong lần cập nhật tiếp theo hoặc sau một khoảng thời gian nhất định.
+    IEnumerator AfterDeath()
+    {
+        // Đợi 3 giây trước khi ẩn quái vật
+        yield return new WaitForSeconds(1f);
+
+        // Ẩn quái vật
+        gameObject.SetActive(false);
+    }
 
     void DropCoin()
     {
         // Sinh ra một số lượng coin ngẫu nhiên từ minCoinCount đến maxCoinCount
         int coinCount = Random.Range(minCoinCount, maxCoinCount + 1);
-                for (int i = 0; i < coinCount; i++)
+        for (int i = 0; i < coinCount; i++)
         {
             Instantiate(coinPrefab, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f), Quaternion.identity);
         }
-       
     }
 
     void UpdateCoinText()
@@ -163,4 +170,3 @@ public class quai2Scrip : MonoBehaviour
         coinText.text = coinCount.ToString();
     }
 }
-
