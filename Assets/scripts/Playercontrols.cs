@@ -34,7 +34,7 @@ public class Playercontrols : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
 
     //tham chiếu tới animator
-    //private Animator _animator;
+    private Animator _animator;
 
     //tham chiếu đến arrow
     [SerializeField]
@@ -80,7 +80,7 @@ public class Playercontrols : MonoBehaviour
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //hiển thị điểm
         _scoreText.text = _score.ToString();       
@@ -105,6 +105,7 @@ public class Playercontrols : MonoBehaviour
         Move();
         Jump();
         bow();
+        FlipSprite();
     }
 
 
@@ -141,20 +142,20 @@ public class Playercontrols : MonoBehaviour
         {
             //qua phải
             isMovingRight = true;
-            //_animator.SetBool("Isrunning", true);
+            _animator.SetBool("Isrunning", true);
             //_animator.SetBool("Isjump", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("Isrunning", false);
             //_animator.SetBool("Isjump", false);
         }
         else
         {
             //đứng yên 
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("Isrunning", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
@@ -223,5 +224,11 @@ public class Playercontrols : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+    }
+    private void FlipSprite()
+    {
+        transform.localScale = isMovingRight ?
+            new Vector2(1f, 1f)
+            : new Vector2(-1f, 1f);
     }
 }
