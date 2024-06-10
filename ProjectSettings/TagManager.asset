@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - arrow
+  - UI
+  - boss
+  - background
+  - platform
+  - Enemies
+  - coins
+  - Enemes
+  - coin
+  - Boss
+  - coinn
+  - Spikes
+  - Ladder
+  - ground
   layers:
   - Default
   - TransparentFX
@@ -11,7 +25,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - platform
   - 
   - 
   - 
@@ -40,4 +54,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: platform
+    uniqueID: 4102994927
     locked: 0
