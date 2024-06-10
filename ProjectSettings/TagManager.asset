@@ -4,32 +4,23 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - platform
-  - player
-<<<<<<< HEAD
-  - coin
-=======
-  - background
-  - Spikes
-  - Enemies
+  - ground
   - Enemes
-  - arrow
-  - Climbing
-  - Ladder
-  - boss
-  - coins
-  - Boss
   - coinn
-  - UI
->>>>>>> main
+  - Boss
+  - Ladder
+  - water
+  - bulet
+  - bulletPickup
+  - Spikes
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - player
+  - EnemyHitbox
   - Water
   - UI
-  - platform
+  - 
   - 
   - 
   - 
@@ -58,16 +49,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: backgound
-    uniqueID: 3120281169
-    locked: 0
-  - name: platform
-    uniqueID: 680566401
-    locked: 0
-  - name: player
-    uniqueID: 1444765727
-    locked: 0
-  - name: UI
-    uniqueID: 2787427033
     locked: 0
