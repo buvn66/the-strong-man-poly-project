@@ -105,7 +105,7 @@ public class Playercontrols : MonoBehaviour
         Move();
         Jump();
         bow();
-       
+        
     }
 
 
@@ -225,5 +225,6 @@ public class Playercontrols : MonoBehaviour
             }
         }
     }
-   
+    
+
 }
