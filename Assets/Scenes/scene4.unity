@@ -50531,10 +50531,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: On (38x38)_0
       objectReference: {fileID: 0}
-    - target: {fileID: 7247563094091822076, guid: d885b0ce77d58a444b4b5a26e8188af5, type: 3}
-      propertyPath: rifgtBoundary
-      value: 2.4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
