@@ -34,7 +34,7 @@ public class Playercontrols : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
 
     //tham chiếu tới animator
-    private Animator _animator;
+    //private Animator _animator;
 
     //tham chiếu đến arrow
     [SerializeField]
@@ -80,14 +80,14 @@ public class Playercontrols : MonoBehaviour
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //hiển thị điểm
-        _scoreText.text = _score.ToString();       
+        _scoreText.text = _score.ToString();
         //hiển thi heart
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if(i < _lives)
+            if (i < _lives)
             {
                 _liveImages[i].SetActive(true);
             }
@@ -105,7 +105,6 @@ public class Playercontrols : MonoBehaviour
         Move();
         Jump();
         bow();
-        
     }
 
 
@@ -142,20 +141,20 @@ public class Playercontrols : MonoBehaviour
         {
             //qua phải
             isMovingRight = true;
-            _animator.SetBool("Isrunning", true);
+            //_animator.SetBool("Isrunning", true);
             //_animator.SetBool("Isjump", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
-            _animator.SetBool("Isrunning", false);
+            //_animator.SetBool("Isrunning", false);
             //_animator.SetBool("Isjump", false);
         }
         else
         {
             //đứng yên 
-            _animator.SetBool("Isrunning", false);
+            //_animator.SetBool("Isrunning", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
@@ -183,7 +182,7 @@ public class Playercontrols : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-       //nếu va chạm với 
+        //nếu va chạm với 
         if (other.gameObject.CompareTag("coins"))
         {
             //biến mất đồng xu
@@ -211,10 +210,41 @@ public class Playercontrols : MonoBehaviour
                     _liveImages[i].SetActive(false);
                 }
             }
+            //reload game 
             if (_lives > 0)
             {
                 //reload game 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);               
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            //hiện gameover panel
+            else
+            {
+                //hiện gameover panel
+                _gameOverpanel.SetActive(true);
+                //dừng game 
+                Time.timeScale = 0;
+            }
+        }
+        //đụng vào boss
+        else if (other.gameObject.CompareTag("boss"))
+        {
+            _lives -= 1;
+            //hiển thi live images
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < _lives)
+                {
+                    _liveImages[i].SetActive(true);
+                }
+                else
+                {
+                    _liveImages[i].SetActive(false);
+                }
+            }
+            if (_lives > 0)
+            {
+                //reload game 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
             else
             {
@@ -224,7 +254,35 @@ public class Playercontrols : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
-    }
-    
+        // đụng vào bẫy
+        else if (other.gameObject.CompareTag("trap"))
+        {
+            _lives -= 1;
+            //hiển thi live images
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < _lives)
+                {
+                    _liveImages[i].SetActive(true);
+                }
+                else
+                {
+                    _liveImages[i].SetActive(false);
+                }
+            }
+            if (_lives > 0)
+            {
+                //reload game 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else
+            {
+                //hiện gameover panel
+                _gameOverpanel.SetActive(true);
+                //dừng game 
+                Time.timeScale = 0;
+            }
+        }
 
+    }
 }
