@@ -25,6 +25,11 @@ public class PlayerScript : MonoBehaviour
     public TMP_Text heartText;
     public Vector3 respawnPosition;
     private bool isOnLadder = false;
+    //tham chiếu đến file suond
+    [SerializeField]
+    private AudioClip _coinnCollectSXF;
+    //tham chiếu đến ngồn âm thanh 
+    private AudioSource _audioSource;
 
     void Start()
     {
@@ -33,6 +38,7 @@ public class PlayerScript : MonoBehaviour
         UpdateCoinText();
         UpdateHeartText();
         respawnPosition = transform.position;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -177,12 +183,18 @@ public class PlayerScript : MonoBehaviour
         }
         else if (other.CompareTag("coinn"))
         {
-            Animator animator = other.gameObject.GetComponent<Animator>();
+            
             animator.Play("coin_kill");
+
+
+            //phát ra tiếng nhạc
+            _audioSource.PlayOneShot(_coinnCollectSXF);
 
             coinCount++;
             UpdateCoinText();
             Destroy(other.gameObject, 0.57f);
+            
+
         }
     }
 
