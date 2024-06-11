@@ -15,15 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/dangky.unity
     guid: 784b4b9f021b0274f9afa6b331b6566e
   - enabled: 1
-    path: Assets/Scenes/Scene1 khang.unity
-    guid: 2a30975585ffb8e47b8c2beb694f0bf4
-  - enabled: 1
     path: Assets/Scenes/Scenes 2.unity
     guid: 7978bde1e13ae0447af63a86e5e02a2b
   - enabled: 1
-    path: Assets/Scenes/scenes 3.unity
-    guid: bdaccd818a970724c8de0c7af4983f69
-  - enabled: 1
-    path: Assets/Scenes/scene4.unity
-    guid: e35594a3e1b2af841bf739b39d299355
+    path: Assets/Scenes/Scene1 khang.unity
+    guid: 2a30975585ffb8e47b8c2beb694f0bf4
   m_configObjects: {}
