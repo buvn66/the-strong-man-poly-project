@@ -8095,6 +8095,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   climbSpeed: 5
+--- !u!95 &1012651506
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77121993}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74e8648eacdc3f84d8ba48f2c7b6e9a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1013593972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34482,6 +34503,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3395687348570231562, guid: b7867d2754a588147a26c9d35fe2850a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1012651500}
+    - targetCorrespondingSourceObject: {fileID: 3395687348570231562, guid: b7867d2754a588147a26c9d35fe2850a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1012651506}
   m_SourcePrefab: {fileID: 100100000, guid: b7867d2754a588147a26c9d35fe2850a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
