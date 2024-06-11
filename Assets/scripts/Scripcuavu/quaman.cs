@@ -12,7 +12,7 @@ public class quaman : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Boss"))
+        if (collision.CompareTag("Player"))
         {
             loading();
         }
