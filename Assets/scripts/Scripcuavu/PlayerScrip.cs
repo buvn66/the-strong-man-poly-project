@@ -25,7 +25,13 @@ public class PlayerScript : MonoBehaviour
     public TMP_Text heartText;
     public Vector3 respawnPosition;
     private bool isOnLadder = false;
+    //tham chiếu đến file suond
+    [SerializeField]
+    private AudioClip _coinCollectSXF;
 
+
+    //tham chiếu đến ngồn âm thanh 
+    private AudioSource _audioSource;
     void Start()
     {
         InitializeComponents();
@@ -33,6 +39,7 @@ public class PlayerScript : MonoBehaviour
         UpdateCoinText();
         UpdateHeartText();
         respawnPosition = transform.position;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -179,6 +186,8 @@ public class PlayerScript : MonoBehaviour
         {
             Animator animator = other.gameObject.GetComponent<Animator>();
             animator.Play("coin_kill");
+            //phát ra tiếng nhạc
+            _audioSource.PlayOneShot(_coinCollectSXF);
 
             coinCount++;
             UpdateCoinText();
