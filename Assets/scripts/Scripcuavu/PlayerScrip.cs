@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI; // Để sử dụng UI elements như Panel
 
 public class PlayerScript : MonoBehaviour
 {
@@ -25,13 +26,12 @@ public class PlayerScript : MonoBehaviour
     public TMP_Text heartText;
     public Vector3 respawnPosition;
     private bool isOnLadder = false;
-    //tham chiếu đến file suond
     [SerializeField]
     private AudioClip _coinCollectSXF;
-
-
-    //tham chiếu đến ngồn âm thanh 
     private AudioSource _audioSource;
+    // Biến để tham chiếu đến Panel "You Died"
+    public GameObject youDiedPanel;
+
     void Start()
     {
         InitializeComponents();
@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour
         UpdateHeartText();
         respawnPosition = transform.position;
         _audioSource = GetComponent<AudioSource>();
+        youDiedPanel.SetActive(false); // Đảm bảo Panel bắt đầu ở trạng thái tắt
     }
 
     void Update()
@@ -138,7 +139,7 @@ public class PlayerScript : MonoBehaviour
             UpdateHeartText();
             if (heartCount <= 0)
             {
-                gameObject.SetActive(false);
+                HandleDeath(); // Gọi phương thức khi nhân vật chết
             }
             else
             {
@@ -151,7 +152,7 @@ public class PlayerScript : MonoBehaviour
             UpdateHeartText(); // Cập nhật hiển thị máu trên thanh text
             if (heartCount <= 0)
             {
-                gameObject.SetActive(false); // Nếu máu hết, vô hiệu hóa nhân vật
+                HandleDeath(); // Gọi phương thức khi nhân vật chết
             }
             else
             {
@@ -186,9 +187,7 @@ public class PlayerScript : MonoBehaviour
         {
             Animator animator = other.gameObject.GetComponent<Animator>();
             animator.Play("coin_kill");
-            //phát ra tiếng nhạc
             _audioSource.PlayOneShot(_coinCollectSXF);
-
             coinCount++;
             UpdateCoinText();
             Destroy(other.gameObject, 0.57f);
@@ -240,5 +239,11 @@ public class PlayerScript : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
+    }
+
+    void HandleDeath()
+    {
+        youDiedPanel.SetActive(true); // Hiển thị panel "You Died"
+        gameObject.SetActive(false); // Vô hiệu hóa nhân vật
     }
 }
