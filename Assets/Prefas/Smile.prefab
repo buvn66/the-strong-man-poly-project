@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3523888814498577258}
   - component: {fileID: 5233863503614192373}
   - component: {fileID: 5665509969044428022}
-  - component: {fileID: 1627256252257042312}
+  - component: {fileID: 7398417264310057762}
   m_Layer: 0
   m_Name: Smile
   m_TagString: Enemies
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4816678378563851857}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.6299458, y: -1.4133515, z: -1.7166389}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -181,7 +181,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.6666667}
   m_EdgeRadius: 0
---- !u!114 &1627256252257042312
+--- !u!114 &7398417264310057762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,10 +190,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4816678378563851857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31a8674963ee2146ab2137f01f7d623, type: 3}
+  m_Script: {fileID: 11500000, guid: f19f0779aa506634098cb4b2872c0ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftBoundary: 0
-  rightBoundary: 0
+  leftBoundary: -39.46
+  rifgtBoundary: -30.97
   moveSpeed: 1
-  _isMovingRight: 1
