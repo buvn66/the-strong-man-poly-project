@@ -1545,11 +1545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7247563094091822076, guid: d885b0ce77d58a444b4b5a26e8188af5, type: 3}
       propertyPath: leftBoundary
-      value: 27.22
+      value: 55.1
       objectReference: {fileID: 0}
     - target: {fileID: 7247563094091822076, guid: d885b0ce77d58a444b4b5a26e8188af5, type: 3}
       propertyPath: rifgtBoundary
-      value: 31.16
+      value: 59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2561,7 +2561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4804314429330142406, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.1469746
+      value: -7.28
       objectReference: {fileID: 0}
     - target: {fileID: 4804314429330142406, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2598,6 +2598,14 @@ PrefabInstance:
     - target: {fileID: 4816678378563851857, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
       propertyPath: m_Name
       value: Smile (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398417264310057762, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
+      propertyPath: leftBoundary
+      value: -31.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398417264310057762, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
+      propertyPath: rifgtBoundary
+      value: -23.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11503,7 +11511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4804314429330142406, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.1469746
+      value: -7.29
       objectReference: {fileID: 0}
     - target: {fileID: 4804314429330142406, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11543,11 +11551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7398417264310057762, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
       propertyPath: leftBoundary
-      value: -39.46
+      value: -31.83
       objectReference: {fileID: 0}
     - target: {fileID: 7398417264310057762, guid: fa9ca1182f30e784c9a84e9fb0a437f2, type: 3}
       propertyPath: rifgtBoundary
-      value: -30.97
+      value: -23.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

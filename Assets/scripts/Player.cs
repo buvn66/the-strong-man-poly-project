@@ -1,118 +1,126 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
+using System;
 
 public class Player : MonoBehaviour
 {
-    // van toc chuyen dong ngang cua nhan vat
-    // public, private, protected, internal, protected internal
+
+
+    //làm cho nhân vật duy chuyển 
+    //public là hàm tồn tại ở mọi nơi 
+    //private làm hàm tồ tại chỉ trong một class
+    [SerializeField] //SerializeField cho phép chỉnh sửa tr edit
+    public float movespeed = 5f;
+
+
+    // giá tri lực nhẩy
     [SerializeField]
-    private float moveSpeed = 5f; // 5m/s
+    private float _jumpForce = 40f;
 
-    [SerializeField]
-    private float jumpForce = 5f;
 
-    // Rigidbody 2D: Vat ly
-    private Rigidbody2D _rigidbody;
+    //kiểm tra hướng duy chuyển của nhân vật 
+    private bool isMovingRight = true;
 
-    // Bien kiem tra huong di
-    private bool _isMovingRight = true;
 
-    // tham chieu den mui ten trong prefabs
-    public GameObject arrowPrefabs;
+    //tham chiếu tới rigibody 2D        
+    private Rigidbody2D _rigibody2D;
 
-    // tham chieu den vi tri cua mui ten
-    public Transform arrowTransform;
 
-    // Collider 2D: va cham
+    //tham chiếu tới BoxCollider2D
     private BoxCollider2D _boxCollider2D;
 
-    //Animation
+    //tham chiếu tới animator
     private Animator _animator;
 
-    // Tham chieu den TextMeshPro diem so
+    //tham chiếu đến arrow
+    [SerializeField]
+    private GameObject _arrowprefab;
+
+
+    ////tham chiếu đến bow
+    [SerializeField]
+    private Transform _bow;
+
+
+    //tham chiếu đến file suond
+    [SerializeField]
+    private AudioClip _coinCollectSXF;
+
+
+    //tham chiếu đến ngồn âm thanh 
+    private AudioSource _audioSource;
+
+
+    //tham chiếu đến TextMeshPro
     [SerializeField]
     private TextMeshProUGUI _scoreText;
     private static int _score = 0;
 
-    // tham chieu TextMeshPro thoi gian
-    [SerializeField]
-    private TextMeshProUGUI _timeText;
-    private static float _time = 0;
 
-    //Phat nhac
-    //tham chieu den AudioSource
-    //tham chieu den audiClip
-    private AudioSource _audioSource;
+    //tham chiếu đên panel gameover     
     [SerializeField]
-    private AudioClip _coinCollectSXF;
+    private GameObject _gameOverpanel;
+    private static int _lives = 3;
 
-    //khai bao bien quan li so mang cua nhan vat
+
+    //tham  chiếu hiện số mạng 
     [SerializeField]
-    private static int lives = 3;
-
-    // tham chieu den 3 hinh anh mang
+    private TextMeshProUGUI _livesText;
     [SerializeField]
-    private GameObject[] _livesImages;
-
-    //khai bao tham chieu den GameOverPanel
-    [SerializeField]
-    private GameObject _gameOverPanel;
-
+    private GameObject[] _liveImages;
     //Double Jum
     private bool _canDoubleJum = false;
 
 
-    // Start is called before the first frame update
+    //hàm start dùng để khởi tạo các  giá trị của biến 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
+        _rigibody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-
-        // Gan gia tri mac dinh cho diem so
+        //hiển thị điểm
         _scoreText.text = _score.ToString();
-
+        //hiển thi heart
         for (int i = 0; i < 3; i++)
         {
-            if (i < lives)
+            if (i < _lives)
             {
-                _livesImages[i].SetActive(true);
+                _liveImages[i].SetActive(true);
             }
             else
             {
-                _livesImages[i].SetActive(false);
+                _liveImages[i].SetActive(false);
             }
         }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    //dùng để cập nhật trạ thái của đối tượng dựa trên thời ggian thật  
+    private void Update()
     {
         Move();
         Jump();
+        bow();
         FlipSprite();
-        Fire();
-
-        //Dem thoi gian
-        _time += Time.deltaTime;
-        _timeText.text = $"{_time}";
     }
 
-    private void Fire()
+
+    //hàm sử lý bow bắng ra được arrow
+    private void bow()
     {
         //neu nhan phim F thi ban dan
         if (Input.GetKeyDown(KeyCode.F))
         {
             //tao ra vien dan tai vi tri sung
-            var oneArrow = Instantiate(arrowPrefabs, arrowTransform.position, Quaternion.identity);
+            var oneArrow = Instantiate(_arrowprefab, _bow.position, Quaternion.identity);
             //cho vien dan bay theo huong nhan vat
             var velocity = new Vector2(50f, 0);
-            if (_isMovingRight == false)
+            if (isMovingRight == false)
             {
                 velocity = new Vector2(-50f, 0);
             }
@@ -133,6 +141,7 @@ public class Player : MonoBehaviour
             _animator.SetBool("IsAttacking", false);
         }
     }
+
     private void Move()
     {
         // lay gia tri trung ngang left, right, a, d
@@ -143,16 +152,16 @@ public class Player : MonoBehaviour
         //local: so sanh voi parent
 
         transform.localPosition += new Vector3(horizontalInput, 0, 0)
-                                  * moveSpeed * Time.deltaTime;
+                                  * movespeed * Time.deltaTime;
         if (horizontalInput > 0)
         {
-            _isMovingRight = true;
+            isMovingRight = true;
             _animator.SetBool("IsRunning", true);
 
         }
         else if (horizontalInput < 0)
         {
-            _isMovingRight = false;
+            isMovingRight = false;
             _animator.SetBool("IsRunning", true);
         }
         else
@@ -161,6 +170,8 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    //hàm sử lý Jump
     private void Jump()
     {
         //if (_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("Platform")) == false)
@@ -184,7 +195,7 @@ public class Player : MonoBehaviour
             {
                 if (_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform")) || _canDoubleJum)
                 {
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpForce);
+                    _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
                     if (!_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform")))
                     {
                         _canDoubleJum = false; // Use double jump
@@ -193,15 +204,14 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void FlipSprite()
     {
-        transform.localScale = _isMovingRight ?
+        transform.localScale = isMovingRight ?
         new Vector2(1f, 1f) : new Vector2(-1f, 1f);
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //nếu va chạm với 
         if (other.gameObject.CompareTag("coins"))
         {
             // lam bien mat xu
@@ -217,24 +227,24 @@ public class Player : MonoBehaviour
         {
             //bat su kien Player cham spikes
             //mat 1 mang va reload lai man choi
-            lives -= 1;
+            _lives -= 1;
             // xoa di 1 anh
             for (int i = 0; i < 3; i++)
             {
-                if (i < lives)
+                if (i < _lives)
                 {
-                    _livesImages[i].SetActive(true);
+                    _liveImages[i].SetActive(true);
                 }
                 else
                 {
-                    _livesImages[i].SetActive(false);
+                    _liveImages[i].SetActive(false);
                 }
 
             }
-            if (lives < 1)
+            if (_lives < 1)
             {
                 //Hien ra thong bao GameOver
-                _gameOverPanel.SetActive(true);
+                _gameOverpanel.SetActive(true);
                 //Dung game
                 Time.timeScale = 0;
             }
@@ -248,24 +258,24 @@ public class Player : MonoBehaviour
         {
             //bat su kien Player cham spikes
             //mat 1 mang va reload lai man choi
-            lives -= 1;
+            _lives -= 1;
             // xoa di 1 anh
             for (int i = 0; i < 3; i++)
             {
-                if (i < lives)
+                if (i < _lives)
                 {
-                    _livesImages[i].SetActive(true);
+                    _liveImages[i].SetActive(true);
                 }
                 else
                 {
-                    _livesImages[i].SetActive(false);
+                    _liveImages[i].SetActive(false);
                 }
 
             }
-            if (lives < 1)
+            if (_lives < 1)
             {
                 //Hien ra thong bao GameOver
-                _gameOverPanel.SetActive(true);
+                _gameOverpanel.SetActive(true);
                 //Dung game
                 Time.timeScale = 0;
             }
@@ -276,6 +286,5 @@ public class Player : MonoBehaviour
             }
 
         }
-
     }
 }

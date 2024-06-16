@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5179628358343334075}
   - component: {fileID: 12049234745798339}
   - component: {fileID: 8457158059410963602}
-  - component: {fileID: 7328180098482347884}
   - component: {fileID: 1479908477446788648}
   - component: {fileID: 5152901177750574804}
   - component: {fileID: 3573237638205865323}
@@ -174,27 +173,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92c305270cec2314ca0f66bc2271dac4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movespeed: 5
-  _jumpForce: 40
-  _arrowprefab: {fileID: 0}
-  _bow: {fileID: 0}
-  _coinCollectSXF: {fileID: 0}
-  _scoreText: {fileID: 0}
-  _gameOverpanel: {fileID: 0}
-  _livesText: {fileID: 0}
-  _liveImages: []
---- !u!114 &7328180098482347884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3395687348570231562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc2378166b854f42af8a1318e0e94ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movespeed: 5
