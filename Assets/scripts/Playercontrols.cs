@@ -34,7 +34,7 @@ public class Playercontrols : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
 
     //tham chiếu tới animator
-    //private Animator _animator;
+    private Animator _animator;
 
     //tham chiếu đến arrow
     [SerializeField]
@@ -80,7 +80,7 @@ public class Playercontrols : MonoBehaviour
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //hiển thị điểm
         _scoreText.text = _score.ToString();
@@ -115,6 +115,7 @@ public class Playercontrols : MonoBehaviour
         //nếu người chơi nhấn phím F
         {
             //tạo ra viên đạn tại vị trí của súng
+            //Instantiate: Tạo ra một bản sao của đối tượng _arrowprefab
             var arrow = Instantiate(_arrowprefab, _bow.position, Quaternion.identity);
             //cho viên đạn bay theo hướng của nhân vật
             var velocity = new Vector3(50f, 0);
@@ -141,20 +142,20 @@ public class Playercontrols : MonoBehaviour
         {
             //qua phải
             isMovingRight = true;
-            //_animator.SetBool("Isrunning", true);
+            _animator.SetBool("isrun", true);
             //_animator.SetBool("Isjump", true);
         }
         else if (horizontalInput < 0)
         {
             //qua trái 
             isMovingRight = false;
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("isrun", false);
             //_animator.SetBool("Isjump", false);
         }
         else
         {
             //đứng yên 
-            //_animator.SetBool("Isrunning", false);
+            _animator.SetBool("isrun", false);
         }
         //xoay nhân vật 
         transform.localScale = isMovingRight ?
@@ -180,6 +181,7 @@ public class Playercontrols : MonoBehaviour
             _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         //nếu va chạm với 
