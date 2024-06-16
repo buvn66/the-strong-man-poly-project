@@ -12,7 +12,6 @@ public class Enemiescontrols : MonoBehaviour
     private float moveSpeed = 1f;
     [SerializeField]
     private bool _isMovingRight = true;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,40 +21,54 @@ public class Enemiescontrols : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Lấy vị trí hiện tại của quái vật
+        //lấy vị trí hiện tại của ốc
         var currentPosition = transform.localPosition;
-
         if (currentPosition.x > rightBoundary)
         {
-            // Nếu vị trí hiện tại của quái vật > rightBoundary, di chuyển trái
+            //nếu vị trí hiện tại của ốc < rightboundary 
+            // di chuyển trái
             _isMovingRight = false;
+
         }
         else if (currentPosition.x < leftBoundary)
         {
-            // Nếu vị trí hiện tại của quái vật < leftBoundary, di chuyển phải
+            //nếu vị trí hiện tại của ốc < leftboundary 
+            // di chuyển phải   
             _isMovingRight = true;
         }
 
-        // Tự động di chuyển ngang
+        //tự động di chuyển ngang
         var direction = Vector3.right;
-        if (!_isMovingRight)
+        if (_isMovingRight == false)
         {
             direction = Vector3.left;
         }
-
         transform.Translate(direction * moveSpeed * Time.deltaTime);
-
-        // Xoay mặt quái vật theo hướng di chuyển
-        // Scale hiện tại
+        //xoay mặt enemies
+        //scale hiện tại
         var currentScale = transform.localScale;
-        if (_isMovingRight && currentScale.x < 0)
+        if (_isMovingRight && currentScale.x > 0)
         {
-            currentScale.x = Mathf.Abs(currentScale.x);
+            currentScale.x *= -1;
         }
-        else if (!_isMovingRight && currentScale.x > 0)
+        else if (_isMovingRight == false && currentScale.x < 0)
         {
-            currentScale.x = -Mathf.Abs(currentScale.x);
+            currentScale.x *= -1;
         }
         transform.localScale = currentScale;
+
+    }
+
+
+    //giết enemies làm biến mất viên đạn 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("arrow"))
+        {
+            //nếu chạm tới viên đạn thì chết
+            Destroy(gameObject);
+            //viên đạn biến mất
+            Destroy(collision.gameObject);
+        }
     }
 }
