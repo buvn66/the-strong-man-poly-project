@@ -2,33 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI; // Để sử dụng UI elements như Panel
 
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator animator;
     public float speed;
     private bool isGround = true;
     private int jumpCount = 0;
     public int maxJumpCount = 2;
     public float jumpForce = 5f;
+    public List<GameObject> bulletPrefabs;
+    public int currentBulletIndex = 0;
+    public TMP_Text bulletText;
+    private int bulletCount = 10;
     public TMP_Text coinText;
     private int coinCount = 0;
-    public int countJumpCoin = 0;
     public ParticleSystem showCoinParticle;
     private bool isFacingRight = true;
-    private Animator animator;
+    public float bulletSpeed = 10f;
+    public int heartCount = 3;
+    public TMP_Text heartText;
+    public Vector3 respawnPosition;
+    private bool isOnLadder = false;
+    [SerializeField]
+    private AudioClip _coinCollectSXF;
+    private AudioSource _audioSource;
+    // Biến để tham chiếu đến Panel "You Died"
+    public GameObject youDiedPanel;
 
     void Start()
     {
         InitializeComponents();
+        UpdateBulletText();
         UpdateCoinText();
+        UpdateHeartText();
+        respawnPosition = transform.position;
+        _audioSource = GetComponent<AudioSource>();
+        youDiedPanel.SetActive(false); // Đảm bảo Panel bắt đầu ở trạng thái tắt
     }
 
     void Update()
     {
-        HandleMovement();
-        HandleJumping();
-
+        if (isOnLadder)
+        {
+            HandleClimbing();
+        }
+        else
+        {
+            HandleMovement();
+            HandleJumping();
+            HandleShooting();
+            HandleChangeBulletType();
+        }
     }
 
     void InitializeComponents()
@@ -43,8 +70,7 @@ public class PlayerScript : MonoBehaviour
         Vector2 moveVelocity = new Vector2(moveInput * speed, rb.velocity.y);
         rb.velocity = moveVelocity;
 
-        bool isRunning = Mathf.Abs(moveInput) > 0;
-        animator.SetBool("isRunning", isRunning);
+        animator.SetBool("isRunning", moveInput != 0);
 
         if (moveInput > 0 && !isFacingRight)
         {
@@ -58,65 +84,46 @@ public class PlayerScript : MonoBehaviour
 
     void HandleJumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && (isGround || jumpCount < maxJumpCount))
         {
-            // Kiểm tra nếu nhân vật đang đứng trên mặt đất hoặc chưa đạt tới maxJumpCount
-            if (isGround || jumpCount < maxJumpCount)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                jumpCount++;
-
-                // Kích hoạt animation nhảy ngay lập tức khi nhân vật bắt đầu nhảy
-                animator.SetTrigger("Jump");
-
-                // Nếu không đứng trên mặt đất ngay sau khi nhảy, kích hoạt animation double jump
-                if (!isGround && jumpCount == 2)
-                {
-                    animator.SetTrigger("DoubleJump");
-                }
-            }
-        }
-        // Kiểm tra khi nhân vật rời khỏi mặt đất
-        else if (!isGround)
-        {
-            // Nếu đã nhấn nhảy lần 2 và nhân vật rời khỏi mặt đất, kích hoạt animation DoubleJump
-            if (jumpCount == 2)
-            {
-                animator.SetTrigger("DoubleJump");
-            }
-            // Nếu chỉ nhấn nhảy 1 lần và nhân vật rời khỏi mặt đất, kích hoạt animation Jump
-            else if (jumpCount == 1)
-            {
-                animator.SetTrigger("Jump");
-            }
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpCount++;
         }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void HandleShooting()
     {
-        if (collision.gameObject.CompareTag("Ladder"))
+        if (Input.GetKeyDown(KeyCode.F) && bulletCount > 0)
         {
-            float verticalInput = Input.GetAxis("Vertical");
-            Vector2 climbVelocity = new Vector2(rb.velocity.x, verticalInput * speed);
-            rb.velocity = climbVelocity;
-
-            bool isClimbing = Mathf.Abs(verticalInput) > 0;
-            animator.SetBool("isClimbing", isClimbing);
-
-            if (isClimbing)
-            {
-                // Khi nhân vật đang leo lên cầu thang, vô hiệu hóa trọng lực để ngăn nhân vật rơi xuống
-                rb.gravityScale = 0;
-            }
-            else
-            {
-                rb.gravityScale = 1;
-            }
+            Shoot();
         }
     }
 
+    void Shoot()
+    {
+        Vector3 bulletPosition = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.5f;
+        GameObject selectedBulletPrefab = bulletPrefabs[currentBulletIndex];
+        GameObject bullet = Instantiate(selectedBulletPrefab, bulletPosition, Quaternion.identity);
 
+        Vector2 shootDirection = isFacingRight ? Vector2.right : Vector2.left;
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        bulletRb.gravityScale = 0;
+        bulletRb.velocity = shootDirection * bulletSpeed;
+
+        Destroy(bullet, 3f);
+
+        bulletCount--;
+        UpdateBulletText();
+    }
+
+    void HandleChangeBulletType()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            currentBulletIndex = (currentBulletIndex + 1) % bulletPrefabs.Count;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -124,18 +131,32 @@ public class PlayerScript : MonoBehaviour
         {
             isGround = true;
             jumpCount = 0;
-            animator.SetBool("IsGrounded", true);
+            animator.SetBool("leocau", false);
         }
-        else if (collision.gameObject.tag == "brick")
+        else if (collision.gameObject.CompareTag("Spikes"))
         {
-            countJumpCoin++;
-            coinCount++;
-            coinText.text = coinCount + "";
-            showCoinParticle.Play();
-
-            if (countJumpCoin == 5)
+            heartCount--;
+            UpdateHeartText();
+            if (heartCount <= 0)
             {
-                Destroy(collision.gameObject);
+                HandleDeath(); // Gọi phương thức khi nhân vật chết
+            }
+            else
+            {
+                transform.position = respawnPosition;
+            }
+        }
+        else if (collision.gameObject.CompareTag("Boss")) // Xử lý va chạm với quái
+        {
+            heartCount--; // Giảm máu khi đụng quái
+            UpdateHeartText(); // Cập nhật hiển thị máu trên thanh text
+            if (heartCount <= 0)
+            {
+                HandleDeath(); // Gọi phương thức khi nhân vật chết
+            }
+            else
+            {
+                transform.position = respawnPosition; // Quay lại điểm xuất phát nếu chưa hết máu
             }
         }
     }
@@ -145,26 +166,57 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             isGround = false;
-            animator.SetBool("IsGrounded", false);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("coinn"))
+        if (other.CompareTag("Ladder"))
+        {
+            isOnLadder = true;
+            animator.SetBool("leocau", true);
+            rb.gravityScale = 0; // Tắt trọng lực khi leo
+        }
+        else if (other.CompareTag("bulletPickup"))
+        {
+            bulletCount++;
+            UpdateBulletText();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("coinn"))
         {
             Animator animator = other.gameObject.GetComponent<Animator>();
             animator.Play("coin_kill");
-
+            _audioSource.PlayOneShot(_coinCollectSXF);
             coinCount++;
             UpdateCoinText();
             Destroy(other.gameObject, 0.57f);
         }
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            isOnLadder = false;
+            animator.SetBool("leocau", false);
+            rb.gravityScale = 1; // Bật trọng lực lại khi không leo nữa
+        }
+    }
+
+    void UpdateBulletText()
+    {
+        bulletText.text = bulletCount.ToString();
+    }
+
     void UpdateCoinText()
     {
         coinText.text = coinCount.ToString();
+    }
+
+    void UpdateHeartText()
+    {
+        heartText.text = heartCount.ToString();
     }
 
     void Flip()
@@ -173,5 +225,25 @@ public class PlayerScript : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    void HandleClimbing()
+    {
+        float verticalInput = Input.GetAxis("Vertical");
+
+        if (verticalInput != 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, verticalInput * speed);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }
+    }
+
+    void HandleDeath()
+    {
+        youDiedPanel.SetActive(true); // Hiển thị panel "You Died"
+        gameObject.SetActive(false); // Vô hiệu hóa nhân vật
     }
 }
