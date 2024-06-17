@@ -55,11 +55,16 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+<<<<<<< HEAD
   - name: background
     uniqueID: 32865587
     locked: 0
   - name: climb
     uniqueID: 1677878553
+=======
+  - name: Ladder
+    uniqueID: 264254177
+>>>>>>> Scene4KIET
     locked: 0
   - name: platform
     uniqueID: 4102994927
@@ -72,6 +77,9 @@ TagManager:
     locked: 0
   - name: coins
     uniqueID: 2025930307
+    locked: 0
+  - name: backgound
+    uniqueID: 3120281169
     locked: 0
   - name: UI
     uniqueID: 671550393
