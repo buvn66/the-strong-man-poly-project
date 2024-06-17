@@ -32,7 +32,7 @@ public class Climb : MonoBehaviour
         {
             isClimbing = false;
             Lad.gravityScale = 10f;
-            _animator.SetBool("isClimbingg", false);
+            _animator.SetBool("isClimbingg", true);
         }
     }
     private void FixedUpdate()
