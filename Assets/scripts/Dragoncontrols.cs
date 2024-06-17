@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Dragoncontrols : MonoBehaviour
+public class Boss : MonoBehaviour
 {
+    //máu của Boss 
+    private float _health = 10;
+
+    [SerializeField]
+    private Slider _healthSlider;
 
     [SerializeField]
     private float leftBoundary;
@@ -13,27 +20,42 @@ public class Dragoncontrols : MonoBehaviour
     private float moveSpeed = 1f;
     [SerializeField]
     private bool _isMovingRight = true;
-    // Start is called before the first frame update
-    void Start()
-    {
 
+    private void Start()
+    {
+        _healthSlider.value = _health;
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("arrow"))
+        {
+            //hủy viên đạn 
+            Destroy(other.gameObject);
+            //mổi lần trung arrow -10 máu của boss  
+            _health -= 1;
+            _healthSlider.value = _health;
+            if (_health <= 0)
+            {               
+
+                Destroy(gameObject);
+            }
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //lấy vị trí hiện tại dragon
+        //lấy vị trí hiện tại 
         var currentPosition = transform.localPosition;
         if (currentPosition.x > rightBoundary)
         {
-            //nếu vị trí hiện tại Dragon tboundary 
+            //nếu vị trí hiện tại  < rightboundary 
             // di chuyển trái
             _isMovingRight = false;
 
         }
         else if (currentPosition.x < leftBoundary)
         {
-            //nếu vị trí hiện tại của Dragon ndary 
+            //nếu vị trí hiện tại  < leftboundary 
             // di chuyển phải   
             _isMovingRight = true;
         }
@@ -45,7 +67,7 @@ public class Dragoncontrols : MonoBehaviour
             direction = Vector3.left;
         }
         transform.Translate(direction * moveSpeed * Time.deltaTime);
-        //xoay mặt boss
+        //xoay mặt 
         //scale hiện tại
         var currentScale = transform.localScale;
         if (_isMovingRight && currentScale.x > 0)
@@ -58,5 +80,5 @@ public class Dragoncontrols : MonoBehaviour
         }
         transform.localScale = currentScale;
 
-        }
     }
+}

@@ -22,12 +22,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - background
   - Water
   - UI
   - platform
-  - 
-  - 
+  - quai
+  - player
   - 
   - 
   - 
@@ -55,6 +55,27 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: background
+    uniqueID: 32865587
+    locked: 0
+  - name: climb
+    uniqueID: 1677878553
+    locked: 0
   - name: platform
     uniqueID: 4102994927
+    locked: 0
+  - name: quai
+    uniqueID: 3595296961
+    locked: 0
+  - name: fire
+    uniqueID: 3032739085
+    locked: 0
+  - name: coins
+    uniqueID: 2025930307
+    locked: 0
+  - name: UI
+    uniqueID: 671550393
+    locked: 0
+  - name: player
+    uniqueID: 1720850015
     locked: 0

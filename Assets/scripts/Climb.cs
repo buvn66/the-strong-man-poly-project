@@ -31,8 +31,8 @@ public class Climb : MonoBehaviour
         if (collision.CompareTag("Ladder"))
         {
             isClimbing = false;
-            Lad.gravityScale = 1f;
-            _animator.SetBool("isClimbingg", false);
+            Lad.gravityScale = 10f;
+            _animator.SetBool("isClimbingg", true);
         }
     }
     private void FixedUpdate()

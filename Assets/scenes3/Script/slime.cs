@@ -61,7 +61,7 @@ public class slime : MonoBehaviour
     }
     private void Bekilled(string tag)
     {
-        if (tag == "arrow")
+        if (tag == "viendan")
         {
             Destroy(gameObject);
         }
