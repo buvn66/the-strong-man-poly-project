@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 using System;
 
-public class Playercontrols : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
 
@@ -34,7 +34,7 @@ public class Playercontrols : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
 
     //tham chiếu tới animator
-    //private Animator _animator;
+    private Animator _animator;
 
     //tham chiếu đến arrow
     [SerializeField]
@@ -72,7 +72,8 @@ public class Playercontrols : MonoBehaviour
     private TextMeshProUGUI _livesText;
     [SerializeField]
     private GameObject[] _liveImages;
-
+    //Double Jum
+    private bool _canDoubleJum = false;
 
 
     //hàm start dùng để khởi tạo các  giá trị của biến 
@@ -80,7 +81,7 @@ public class Playercontrols : MonoBehaviour
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _rigibody2D = GetComponent<Rigidbody2D>();
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //hiển thị điểm
         _scoreText.text = _score.ToString();
@@ -105,102 +106,129 @@ public class Playercontrols : MonoBehaviour
         Move();
         Jump();
         bow();
+        FlipSprite();
     }
 
 
     //hàm sử lý bow bắng ra được arrow
     private void bow()
     {
+        //neu nhan phim F thi ban dan
         if (Input.GetKeyDown(KeyCode.F))
-        //nếu người chơi nhấn phím F
         {
-            //tạo ra viên đạn tại vị trí của súng
-            //Instantiate: Tạo ra một bản sao của đối tượng _arrowprefab
-            var arrow = Instantiate(_arrowprefab, _bow.position, Quaternion.identity);
-            //cho viên đạn bay theo hướng của nhân vật
-            var velocity = new Vector3(50f, 0);
+            //tao ra vien dan tai vi tri sung
+            var oneArrow = Instantiate(_arrowprefab, _bow.position, Quaternion.identity);
+            //cho vien dan bay theo huong nhan vat
+            var velocity = new Vector2(50f, 0);
             if (isMovingRight == false)
             {
-                velocity.x *= -1;
+                velocity = new Vector2(-50f, 0);
             }
-            arrow.GetComponent<Rigidbody2D>().velocity = velocity;
-            //huy viên đạn sao 2s
-            Destroy(arrow, 1f);
+            oneArrow.GetComponent<Rigidbody2D>().velocity = velocity;
+            //huy vien dan sau 2s
+            Destroy(oneArrow, 2f);
+        }
+        if (Input.GetKey(KeyCode.F))
+        {
+            _animator.SetBool("IsAttacking", true);
+        }
+        //else if (Input.GetKey(KeyCode.F))
+        //{
+        //    _animator.SetBool("isAttacking", false);
+        //}
+        else
+        {
+            _animator.SetBool("IsAttacking", false);
         }
     }
 
     private void Move()
     {
-        //horizontalInput lắng nghe các phím điều hướng 
+        // lay gia tri trung ngang left, right, a, d
         var horizontalInput = Input.GetAxis("Horizontal");
-        //điều khiển phải trái
-        transform.localPosition += new Vector3(horizontalInput, 0, 0)
-            * movespeed * Time.deltaTime;
-        //+= là lấy giá tri ban đầu tạo ra giá trị mới
 
+        // Dieu khien
+        //Global: so sanh voi world
+        //local: so sanh voi parent
+
+        transform.localPosition += new Vector3(horizontalInput, 0, 0)
+                                  * movespeed * Time.deltaTime;
         if (horizontalInput > 0)
         {
-            //qua phải
             isMovingRight = true;
-            //_animator.SetBool("isrun", true);
-            //_animator.SetBool("Isjump", true);
+            _animator.SetBool("IsRunning", true);
+
         }
         else if (horizontalInput < 0)
         {
-            //qua trái 
             isMovingRight = false;
-            //_animator.SetBool("isrun", false);
-            //_animator.SetBool("Isjump", false);
+            _animator.SetBool("IsRunning", true);
         }
         else
         {
-            //đứng yên 
-            //_animator.SetBool("isrun", false);
+            _animator.SetBool("IsRunning", false);
         }
-        //xoay nhân vật 
-        transform.localScale = isMovingRight ?
-            new Vector2(1f, 1f)
-            : new Vector2(-1f, 1);
     }
 
 
     //hàm sử lý Jump
     private void Jump()
     {
-        //kiểm tra nhân vật còn trên mặt đất hay không
-        var Check = _boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform"));
-        if (Check == false)
+        //if (_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("Platform")) == false)
+        //{
+        //    return;
+        //}
+        //var verticalInput = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
+        //if (verticalInput > 0)
+        //{
+        //    _rigidbody.velocity = new Vector2(0, jumpForce);
+        //}
+
+        // private void Jump()
         {
-            return;
-        }
-        var verticalInput = Input.GetAxis("Jump");
-        if (verticalInput > 0)
-        {
-            //1. tạo lực nhảy lên trên.
-            //_rigidbody2D.AddForce(new Vector2(0, _jumpForce));
-            _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
+            if (_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform")))
+            {
+                _canDoubleJum = true; // reset laij khi player cham dat 
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform")) || _canDoubleJum)
+                {
+                    _rigibody2D.velocity = new Vector2(_rigibody2D.velocity.x, _jumpForce);
+                    if (!_boxCollider2D.IsTouchingLayers(LayerMask.GetMask("platform")))
+                    {
+                        _canDoubleJum = false; // Use double jump
+                    }
+                }
+            }
         }
     }
-
+    private void FlipSprite()
+    {
+        transform.localScale = isMovingRight ?
+        new Vector2(1f, 1f) : new Vector2(-1f, 1f);
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         //nếu va chạm với 
         if (other.gameObject.CompareTag("coins"))
         {
-            //biến mất đồng xu
+            // lam bien mat xu
             Destroy(other.gameObject);
-            //phát ra tiếng nhạc
+            // phat ra tieng nhac
             _audioSource.PlayOneShot(_coinCollectSXF);
-            //tăng điêm
-            _score += 1;
-            //hiểm thị điểm
+
+            //tang diem
+            _score++;
             _scoreText.text = _score.ToString();
         }
-        //nếu va chạm với Enemies
         else if (other.gameObject.CompareTag("Enemies"))
         {
+            //bat su kien Player cham spikes
+            //mat 1 mang va reload lai man choi
             _lives -= 1;
-            //hiển thi live images
+            // xoa di 1 anh
             for (int i = 0; i < 3; i++)
             {
                 if (i < _lives)
@@ -211,80 +239,52 @@ public class Playercontrols : MonoBehaviour
                 {
                     _liveImages[i].SetActive(false);
                 }
-            }
-            //reload game 
-            if (_lives > 0)
-            {
-                //reload game 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-            //hiện gameover panel
-            else
-            {
-                //hiện gameover panel
-                _gameOverpanel.SetActive(true);
-                //dừng game 
-                Time.timeScale = 0;
-            }
-        }
-        //đụng vào boss
-        else if (other.gameObject.CompareTag("boss"))
-        {
-            _lives -= 1;
-            //hiển thi live images
-            for (int i = 0; i < 3; i++)
-            {
-                if (i < _lives)
-                {
-                    _liveImages[i].SetActive(true);
-                }
-                else
-                {
-                    _liveImages[i].SetActive(false);
-                }
-            }
-            if (_lives > 0)
-            {
-                //reload game 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-            else
-            {
-                //hiện gameover panel
-                _gameOverpanel.SetActive(true);
-                //dừng game 
-                Time.timeScale = 0;
-            }
-        }
-        // đụng vào bẫy
-        else if (other.gameObject.CompareTag("trap"))
-        {
-            _lives -= 1;
-            //hiển thi live images
-            for (int i = 0; i < 3; i++)
-            {
-                if (i < _lives)
-                {
-                    _liveImages[i].SetActive(true);
-                }
-                else
-                {
-                    _liveImages[i].SetActive(false);
-                }
-            }
-            if (_lives > 0)
-            {
-                //reload game 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-            else
-            {
-                //hiện gameover panel
-                _gameOverpanel.SetActive(true);
-                //dừng game 
-                Time.timeScale = 0;
-            }
-        }
 
+            }
+            if (_lives < 1)
+            {
+                //Hien ra thong bao GameOver
+                _gameOverpanel.SetActive(true);
+                //Dung game
+                Time.timeScale = 0;
+            }
+            else
+            {
+                // reload lai man choi hien tai
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+        else if (other.gameObject.CompareTag("Spikes"))
+        {
+            //bat su kien Player cham spikes
+            //mat 1 mang va reload lai man choi
+            _lives -= 1;
+            // xoa di 1 anh
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < _lives)
+                {
+                    _liveImages[i].SetActive(true);
+                }
+                else
+                {
+                    _liveImages[i].SetActive(false);
+                }
+
+            }
+            if (_lives < 1)
+            {
+                //Hien ra thong bao GameOver
+                _gameOverpanel.SetActive(true);
+                //Dung game
+                Time.timeScale = 0;
+            }
+            else
+            {
+                // reload lai man choi hien tai
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
+        }
     }
 }
